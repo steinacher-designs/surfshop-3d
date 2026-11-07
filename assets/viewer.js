@@ -19200,9 +19200,9 @@ for (let e of [
 	"lacquer_white",
 	"painted_concrete"
 ]) Pg.find((t) => t.id === e).paintable = !0;
-var Ig = new Map(Pg.map((e) => [e.id, e]));
-function Lg(e) {
-	let [t, n] = e.split("~"), r = Ig.get(t);
+var Ig = new Map(Pg.map((e) => [e.id, e])), Lg = /* @__PURE__ */ new Map();
+function Rg(e) {
+	let [t, n] = e.split("~"), r = Ig.get(t) ?? Lg.get(t);
 	return !r || !n ? r : {
 		...r,
 		id: e,
@@ -19210,12 +19210,12 @@ function Lg(e) {
 		tex: t
 	};
 }
-var Rg = {
-	get: Lg,
-	has: (e) => !!Lg(e)
+var zg = {
+	get: Rg,
+	has: (e) => !!Rg(e)
 };
 // src/viewer/environments.ts
-function zg(e) {
+function Bg(e) {
 	let t = e >>> 0;
 	return () => {
 		t = t + 1831565813 >>> 0;
@@ -19223,10 +19223,10 @@ function zg(e) {
 		return e = Math.imul(e ^ e >>> 15, e | 1), e ^= e + Math.imul(e ^ e >>> 7, e | 61), ((e ^ e >>> 14) >>> 0) / 4294967296;
 	};
 }
-function Bg(e, t) {
+function Vg(e, t) {
 	return Math.sin(e * .05 + Math.sin(t * .031) * 2) * .5 + Math.sin(t * .043 + e * .017) * .5;
 }
-function Vg(e, t, n = 0, r = Math.random) {
+function Hg(e, t, n = 0, r = Math.random) {
 	let i = e.attributes.position.count, a = new Float32Array(i * 3);
 	for (let e = 0; e < i; e++) {
 		let i = 1 + (r() - .5) * n;
@@ -19234,7 +19234,7 @@ function Vg(e, t, n = 0, r = Math.random) {
 	}
 	return e.setAttribute("color", new Mr(a, 3)), e;
 }
-function Hg(e, t, n, r = 1) {
+function Ug(e, t, n, r = 1) {
 	let i = new qa(e, t), a = i.attributes.position, o = n() * 10;
 	for (let e = 0; e < a.count; e++) {
 		let t = a.getX(e), n = a.getY(e), i = a.getZ(e), s = 1 + .18 * Math.sin(t * 3.1 + o) * Math.sin(n * 2.7 + o) * Math.sin(i * 3.3);
@@ -19242,52 +19242,52 @@ function Hg(e, t, n, r = 1) {
 	}
 	return i.deleteAttribute("uv"), i.computeVertexNormals(), i;
 }
-function Ug(e) {
+function Wg(e) {
 	return e.deleteAttribute("uv"), e.index ? e.toNonIndexed() : e;
 }
-function Wg(e) {
-	let t = zg(e), n = [], r = new Wa(.12, .2, 3.2, 7);
-	r.translate(0, 1.6, 0), n.push(Vg(Ug(r), new J("#5a4636"), .2, t));
+function Gg(e) {
+	let t = Bg(e), n = [], r = new Wa(.12, .2, 3.2, 7);
+	r.translate(0, 1.6, 0), n.push(Hg(Wg(r), new J("#5a4636"), .2, t));
 	let i = 4 + Math.floor(t() * 3);
 	for (let e = 0; e < i; e++) {
-		let e = Hg(1.2 + t() * .9, 1, t, .85);
-		e.translate((t() - .5) * 2.2, 3.6 + t() * 1.8, (t() - .5) * 2.2), n.push(Vg(Ug(e), new J().setHSL(.22 + t() * .07, .55, .17 + t() * .07), .25, t));
-	}
-	return Rd(n);
-}
-function Gg(e) {
-	let t = zg(e), n = [], r = new Wa(.1, .18, 2, 6);
-	r.translate(0, 1, 0), n.push(Vg(Ug(r), new J("#4b3a2c"), .2, t));
-	let i = 7 + t() * 5;
-	for (let e = 0; e < 5; e++) {
-		let r = new Ga((1 - e / 5) * (1.8 + t() * .4) + .3, i / 3.2, 8, 1);
-		r.translate(0, 1.6 + e * i / 6 + i / 6.4, 0), n.push(Vg(Ug(r), new J().setHSL(.36 + t() * .05, .42, .09 + t() * .04), .3, t));
+		let e = Ug(1.2 + t() * .9, 1, t, .85);
+		e.translate((t() - .5) * 2.2, 3.6 + t() * 1.8, (t() - .5) * 2.2), n.push(Hg(Wg(e), new J().setHSL(.22 + t() * .07, .55, .17 + t() * .07), .25, t));
 	}
 	return Rd(n);
 }
 function Kg(e) {
-	let t = zg(e), n = [], r = new Wa(.12, .22, 6, 7);
-	r.translate(.3, 3, 0), r.rotateZ(-.06), n.push(Vg(Ug(r), new J("#6b4f3a"), .2, t));
-	for (let e = 0; e < 4; e++) {
-		let e = Hg(1.6 + t() * .6, 1, t, .45);
-		e.translate((t() - .5) * 2.5 + .4, 6.2 + t() * .6, (t() - .5) * 2.5), n.push(Vg(Ug(e), new J().setHSL(.26, .42, .14 + t() * .05), .25, t));
+	let t = Bg(e), n = [], r = new Wa(.1, .18, 2, 6);
+	r.translate(0, 1, 0), n.push(Hg(Wg(r), new J("#4b3a2c"), .2, t));
+	let i = 7 + t() * 5;
+	for (let e = 0; e < 5; e++) {
+		let r = new Ga((1 - e / 5) * (1.8 + t() * .4) + .3, i / 3.2, 8, 1);
+		r.translate(0, 1.6 + e * i / 6 + i / 6.4, 0), n.push(Hg(Wg(r), new J().setHSL(.36 + t() * .05, .42, .09 + t() * .04), .3, t));
 	}
 	return Rd(n);
 }
-var qg = () => new co({
+function qg(e) {
+	let t = Bg(e), n = [], r = new Wa(.12, .22, 6, 7);
+	r.translate(.3, 3, 0), r.rotateZ(-.06), n.push(Hg(Wg(r), new J("#6b4f3a"), .2, t));
+	for (let e = 0; e < 4; e++) {
+		let e = Ug(1.6 + t() * .6, 1, t, .45);
+		e.translate((t() - .5) * 2.5 + .4, 6.2 + t() * .6, (t() - .5) * 2.5), n.push(Hg(Wg(e), new J().setHSL(.26, .42, .14 + t() * .05), .25, t));
+	}
+	return Rd(n);
+}
+var Jg = () => new co({
 	vertexColors: !0,
 	roughness: .9,
 	metalness: 0,
 	flatShading: !1
 });
-function Jg(e, t, n = !0) {
-	let r = new Ui(e, qg(), t.length), i = new q(), a = new Bt(), o = new W(0, 1, 0);
+function Yg(e, t, n = !0) {
+	let r = new Ui(e, Jg(), t.length), i = new q(), a = new Bt(), o = new W(0, 1, 0);
 	return t.forEach((e, t) => {
 		a.setFromAxisAngle(o, e.rot), i.compose(new W(e.x, e.y, e.z), a, new W(e.s, e.s, e.s)), r.setMatrixAt(t, i);
 	}), r.castShadow = n, r.receiveShadow = !0, r;
 }
-function Yg(e, t = 1) {
-	let n = Rg.get(e), r = jg(n.texture, n.color), i = new co({
+function Xg(e, t = 1) {
+	let n = zg.get(e), r = jg(n.texture, n.color), i = new co({
 		color: "#ffffff",
 		roughness: n.roughness,
 		metalness: 0,
@@ -19304,18 +19304,18 @@ function Yg(e, t = 1) {
 	else i.color.set(n.color);
 	return i;
 }
-function Xg(e, t, n, r, i) {
+function Zg(e, t, n, r, i) {
 	let a = e.quality === "performance" ? 90 : 160, o = new Ya(t, t, a, a);
 	o.rotateX(-Math.PI / 2);
 	let s = o.attributes.position, c = o.attributes.uv;
 	for (let t = 0; t < s.count; t++) {
-		let a = s.getX(t) + e.center[0], o = s.getZ(t) + e.center[1], l = Math.hypot(s.getX(t), s.getZ(t)), u = Math.min(1, Math.max(0, (l - r) / (r * 2))), d = e.groundY - .02 + n * u * u * (.6 + .4 * Bg(a, o));
+		let a = s.getX(t) + e.center[0], o = s.getZ(t) + e.center[1], l = Math.hypot(s.getX(t), s.getZ(t)), u = Math.min(1, Math.max(0, (l - r) / (r * 2))), d = e.groundY - .02 + n * u * u * (.6 + .4 * Vg(a, o));
 		i && (d = i(a, o, l)), s.setXYZ(t, a, d, o), c.setXY(t, a, o);
 	}
 	return o.computeVertexNormals(), o;
 }
-function Zg(e, t, n, r, i, a) {
-	let o = zg(i), s = [], c = 0;
+function Qg(e, t, n, r, i, a) {
+	let o = Bg(i), s = [], c = 0;
 	for (; s.length < t && c++ < t * 20;) {
 		let t = o() * Math.PI * 2, i = n + Math.sqrt(o()) * (r - n), c = e.center[0] + Math.cos(t) * i, l = e.center[1] + Math.sin(t) * i, u = Math.atan2(c - e.center[0], l - e.center[1]);
 		Math.abs((u - e.frontAzimuth + Math.PI * 3) % (Math.PI * 2) - Math.PI) < .45 && i < n * 2.2 || a?.(c, l) || s.push({
@@ -19328,7 +19328,7 @@ function Zg(e, t, n, r, i, a) {
 	}
 	return s;
 }
-function Qg(e, t, n, r = 1) {
+function $g(e, t, n, r = 1) {
 	return e.lib.photo(n).then((e) => {
 		if (!e) return;
 		let n = 1 / (e.size * r), i = (e) => {
@@ -19340,7 +19340,7 @@ function Qg(e, t, n, r = 1) {
 		t.roughnessMap = a, t.aoMap = a, t.roughness = 1, t.metalness = 0, t.vertexColors || t.color.set("#ffffff"), t.needsUpdate = !0;
 	}), t;
 }
-function $g(e, t, n, r, i) {
+function e_(e, t, n, r, i) {
 	r.length && e.lib.model(n).then((e) => {
 		if (!e) return;
 		let n = new q(), a = new Bt(), o = new W(0, 1, 0);
@@ -19353,20 +19353,20 @@ function $g(e, t, n, r, i) {
 		}
 	});
 }
-var e_ = (e, t) => Math.max(1, Math.round(t * (e.quality === "ultra" ? 1.3 : e.quality === "balanced" ? 1 : .4)));
-function t_(e) {
-	let t = s_(e.frontAzimuth);
+var t_ = (e, t) => Math.max(1, Math.round(t * (e.quality === "ultra" ? 1.3 : e.quality === "balanced" ? 1 : .4)));
+function n_(e) {
+	let t = c_(e.frontAzimuth);
 	return e.lighting === "evening" ? t - 50 : e.lighting === "afternoon" ? t - 62 : t - 70;
 }
-function n_(e, t) {
+function r_(e, t) {
 	return e.lighting === "evening" ? t * 1.45 : e.lighting === "afternoon" ? t * 1.08 : t;
 }
-function r_(e) {
-	let t = new In(), n = e.radius + 12, r = new Y(Xg(e, 900, 14, n), Qg(e, Yg("grass"), "grass"));
+function i_(e) {
+	let t = new In(), n = e.radius + 12, r = new Y(Zg(e, 900, 14, n), $g(e, Xg("grass"), "grass"));
 	r.receiveShadow = !0, t.add(r);
 	let i = (t, r) => {
 		let i = Math.hypot(t - e.center[0], r - e.center[1]), a = Math.min(1, Math.max(0, (i - n) / (n * 2)));
-		return e.groundY - .02 + 14 * a * a * (.6 + .4 * Bg(t, r));
+		return e.groundY - .02 + 14 * a * a * (.6 + .4 * Vg(t, r));
 	}, a = (e) => ({
 		...e,
 		y: i(e.x, e.z)
@@ -19375,8 +19375,8 @@ function r_(e) {
 		0,
 		1,
 		2
-	].map((e) => Gg(10 + e)).concat([Wg(20)]).forEach((r, i) => t.add(Jg(r, Zg(e, e_(e, 90), n + 55, 300, 100 + i).map(a), !1))), $g(e, t, "tree_a", Zg(e, e_(e, 14), n + 2, n + 55, 201).map(a), [6, 9]), $g(e, t, "tree_b", Zg(e, e_(e, 12), n + 4, n + 55, 202).map(a), [7, 11]), $g(e, t, "shrub_a", Zg(e, e_(e, 24), e.radius + 2, n + 10, 203), [.8, 1.4]), $g(e, t, "shrub_b", Zg(e, e_(e, 16), e.radius + 3, n + 20, 204), [1, 1.8]), $g(e, t, "grass_a", Zg(e, e_(e, 260), e.radius + 1.5, n + 30, 205).map(a), [.35, .6]), $g(e, t, "rocks", Zg(e, e_(e, 6), n + 3, n + 30, 206).map(a), [.8, 1.4]);
-	let o = t_(e);
+	].map((e) => Kg(10 + e)).concat([Gg(20)]).forEach((r, i) => t.add(Yg(r, Qg(e, t_(e, 90), n + 55, 300, 100 + i).map(a), !1))), e_(e, t, "tree_a", Qg(e, t_(e, 14), n + 2, n + 55, 201).map(a), [6, 9]), e_(e, t, "tree_b", Qg(e, t_(e, 12), n + 4, n + 55, 202).map(a), [7, 11]), e_(e, t, "shrub_a", Qg(e, t_(e, 24), e.radius + 2, n + 10, 203), [.8, 1.4]), e_(e, t, "shrub_b", Qg(e, t_(e, 16), e.radius + 3, n + 20, 204), [1, 1.8]), e_(e, t, "grass_a", Qg(e, t_(e, 260), e.radius + 1.5, n + 30, 205).map(a), [.35, .6]), e_(e, t, "rocks", Qg(e, t_(e, 6), n + 3, n + 30, 206).map(a), [.8, 1.4]);
+	let o = n_(e);
 	return {
 		group: t,
 		hdri: e.lighting,
@@ -19393,7 +19393,7 @@ function r_(e) {
 			near: 90,
 			far: 650
 		},
-		exposure: n_(e, .75),
+		exposure: r_(e, .75),
 		sun: {
 			color: "#ffe9cc",
 			intensity: 3.4,
@@ -19408,17 +19408,17 @@ function r_(e) {
 		walkRadius: n + 25
 	};
 }
-function i_(e) {
+function a_(e) {
 	let t = new In(), n = e.frontAzimuth + Math.PI, r = Math.sin(n), i = Math.cos(n), a = e.radius + 28, o = (t, n, o) => {
 		let s = (t - e.center[0]) * r + (n - e.center[1]) * i, c = e.radius + 8, l = e.groundY - .02;
-		return s > a ? l -= Math.min(3.5, (s - a) * .12) : o > c && (l += Math.max(0, Math.min(1, (o - c) / 60)) * 6 * (.5 + .5 * Bg(t, n)) * Math.max(0, Math.min(1, (a - s) / 30))), l;
-	}, s = Xg(e, 900, 0, e.radius + 8, o), c = s.attributes.position, l = new Float32Array(c.count * 3), u = new J("#cbbf98"), d = new J("#ffffff");
+		return s > a ? l -= Math.min(3.5, (s - a) * .12) : o > c && (l += Math.max(0, Math.min(1, (o - c) / 60)) * 6 * (.5 + .5 * Vg(t, n)) * Math.max(0, Math.min(1, (a - s) / 30))), l;
+	}, s = Zg(e, 900, 0, e.radius + 8, o), c = s.attributes.position, l = new Float32Array(c.count * 3), u = new J("#cbbf98"), d = new J("#ffffff");
 	for (let t = 0; t < c.count; t++) {
 		let n = (c.getX(t) - e.center[0]) * r + (c.getZ(t) - e.center[1]) * i, o = Math.min(1, Math.max(0, (n - (a - 25)) / 20)), s = u.clone().lerp(d, o);
 		l[t * 3] = s.r, l[t * 3 + 1] = s.g, l[t * 3 + 2] = s.b;
 	}
 	s.setAttribute("color", new Mr(l, 3));
-	let f = new Y(s, Qg(e, new co({
+	let f = new Y(s, $g(e, new co({
 		color: "#e3d3ae",
 		roughness: .95,
 		vertexColors: !0
@@ -19428,7 +19428,7 @@ function i_(e) {
 	p.rotateX(-Math.PI / 2);
 	let m = p.attributes.uv, h = p.attributes.position;
 	for (let t = 0; t < h.count; t++) m.setXY(t, h.getX(t) + e.center[0], h.getZ(t) + e.center[1]);
-	let g = new Y(p, Qg(e, Yg("grass"), "grass"));
+	let g = new Y(p, $g(e, Xg("grass"), "grass"));
 	g.position.set(e.center[0], e.groundY - .005, e.center[1]), g.receiveShadow = !0, t.add(g);
 	let _ = Mg();
 	_.repeat.set(60, 60);
@@ -19451,8 +19451,8 @@ function i_(e) {
 		0,
 		1,
 		2
-	].forEach((n) => t.add(Jg(Kg(30 + n), Zg(e, e_(e, 24), e.radius + 40, 220, 40 + n, b).map(x), !1))), $g(e, t, "tree_a", Zg(e, e_(e, 8), e.radius + 10, e.radius + 40, 301, b).map(x), [5, 8]), $g(e, t, "shrub_a", Zg(e, e_(e, 22), e.radius + 2, e.radius + 26, 302, b).map(x), [.7, 1.3]), $g(e, t, "grass_a", Zg(e, e_(e, 220), e.radius + 6, a + 4, 303).map(x), [.4, .7]), $g(e, t, "rocks", Zg(e, e_(e, 8), a - 6, a + 14, 304).map(x), [.8, 1.8]);
-	let S = e.lighting === "day" ? s_(n) - 110 : s_(n) - 120;
+	].forEach((n) => t.add(Yg(qg(30 + n), Qg(e, t_(e, 24), e.radius + 40, 220, 40 + n, b).map(x), !1))), e_(e, t, "tree_a", Qg(e, t_(e, 8), e.radius + 10, e.radius + 40, 301, b).map(x), [5, 8]), e_(e, t, "shrub_a", Qg(e, t_(e, 22), e.radius + 2, e.radius + 26, 302, b).map(x), [.7, 1.3]), e_(e, t, "grass_a", Qg(e, t_(e, 220), e.radius + 6, a + 4, 303).map(x), [.4, .7]), e_(e, t, "rocks", Qg(e, t_(e, 8), a - 6, a + 14, 304).map(x), [.8, 1.8]);
+	let S = e.lighting === "day" ? c_(n) - 110 : c_(n) - 120;
 	return {
 		group: t,
 		hdri: e.lighting,
@@ -19469,7 +19469,7 @@ function i_(e) {
 			near: 200,
 			far: 1800
 		},
-		exposure: n_(e, .72),
+		exposure: r_(e, .72),
 		sun: {
 			color: "#ffe2bd",
 			intensity: 3.2,
@@ -19487,7 +19487,7 @@ function i_(e) {
 		walkRadius: a
 	};
 }
-function a_(e) {
+function o_(e) {
 	let t = new In(), n = e.radius + 6, r = 3.5, [i, a] = e.center, o = e.groundY, s = (e, t, n, r, i, a) => {
 		let o = new Ya(e, t);
 		o.rotateX(-Math.PI / 2);
@@ -19495,14 +19495,14 @@ function a_(e) {
 		for (let e = 0; e < c.count; e++) s.setXY(e, c.getX(e) + n, c.getZ(e) + r);
 		let l = new Y(o, a);
 		return l.position.set(n, i, r), l.receiveShadow = !0, l;
-	}, c = Yg("concrete", 2);
-	c.color.set("#5d6064"), c.roughness = .95, t.add(s(1200, 1200, i, a, o - .15, Qg(e, c, "env_asphalt"))), t.add(s((n + r) * 2, (n + r) * 2, i, a, o - .008, Qg(e, Yg("stone_tiles"), "env_paving"))), t.add(s(n * 2, n * 2, i, a, o - .002, Qg(e, Yg("grass"), "grass")));
+	}, c = Xg("concrete", 2);
+	c.color.set("#5d6064"), c.roughness = .95, t.add(s(1200, 1200, i, a, o - .15, $g(e, c, "env_asphalt"))), t.add(s((n + r) * 2, (n + r) * 2, i, a, o - .008, $g(e, Xg("stone_tiles"), "env_paving"))), t.add(s(n * 2, n * 2, i, a, o - .002, $g(e, Xg("grass"), "grass")));
 	let l = new Y(new Ha((n + r) * 2 + .3, .15, (n + r) * 2 + .3), new co({
 		color: "#a7a39b",
 		roughness: .8
 	}));
 	l.position.set(i, o - .085, a), l.receiveShadow = !0, t.add(l);
-	let u = zg(77), d = [
+	let u = Bg(77), d = [
 		0,
 		1,
 		2,
@@ -19557,13 +19557,13 @@ function a_(e) {
 		s: 1,
 		rot: 0
 	});
-	$g(e, t, "tree_a", m.filter((t) => {
+	e_(e, t, "tree_a", m.filter((t) => {
 		let n = Math.atan2(t.x - i, t.z - a);
 		return Math.abs((n - e.frontAzimuth + Math.PI * 3) % (Math.PI * 2) - Math.PI) > .3;
-	}), [6, 8]), $g(e, t, "shrub_a", Zg(e, e_(e, 18), e.radius + 1.5, n - 1, 401), [.7, 1.2]);
-	let _ = Rd([Vg(Ug(new Wa(.06, .08, 4.5, 6).translate(0, 2.25, 0)), new J("#2c2f33")), Vg(Ug(new Ha(.5, .12, .25).translate(.2, 4.5, 0)), new J("#2c2f33"))]);
-	t.add(Jg(_, h, !1));
-	let v = t_(e);
+	}), [6, 8]), e_(e, t, "shrub_a", Qg(e, t_(e, 18), e.radius + 1.5, n - 1, 401), [.7, 1.2]);
+	let _ = Rd([Hg(Wg(new Wa(.06, .08, 4.5, 6).translate(0, 2.25, 0)), new J("#2c2f33")), Hg(Wg(new Ha(.5, .12, .25).translate(.2, 4.5, 0)), new J("#2c2f33"))]);
+	t.add(Yg(_, h, !1));
+	let v = n_(e);
 	return {
 		group: t,
 		hdri: e.lighting,
@@ -19580,7 +19580,7 @@ function a_(e) {
 			near: 140,
 			far: 700
 		},
-		exposure: n_(e, .72),
+		exposure: r_(e, .72),
 		sun: {
 			color: "#fff6e8",
 			intensity: 3.2,
@@ -19595,7 +19595,7 @@ function a_(e) {
 		walkRadius: n + r + 5
 	};
 }
-function o_(e) {
+function s_(e) {
 	let t = new In(), n = Math.max(40, e.radius * 4), r = new co({
 		color: "#e4e2de",
 		roughness: .92,
@@ -19611,7 +19611,7 @@ function o_(e) {
 	a.push(new U(n * 1.25, n * .9));
 	let o = new Y(new Ja(a.map((e) => new U(e.x * .8, e.y)), 96, e.frontAzimuth + Math.PI / 2 + .6, Math.PI * 2 - 1.2), r);
 	o.position.set(e.center[0], e.groundY - .01, e.center[1]), o.receiveShadow = !0, t.add(o);
-	let s = s_(e.frontAzimuth) + 65;
+	let s = c_(e.frontAzimuth) + 65;
 	return {
 		group: t,
 		sky: null,
@@ -19638,14 +19638,14 @@ function o_(e) {
 		walkRadius: n * .7
 	};
 }
-var s_ = (e) => e * 180 / Math.PI;
-function c_(e, t) {
+var c_ = (e) => e * 180 / Math.PI;
+function l_(e, t) {
 	let n = new In(), r = Math.max(120, e.radius * 8), i = new Y(new Ua(r * .9, 64), new Za({
 		opacity: .42,
 		color: "#1a1814"
 	}));
 	i.rotateX(-Math.PI / 2), i.position.set(e.center[0], e.groundY + .005, e.center[1]), i.receiveShadow = !0, n.add(i);
-	let a = s_(e.frontAzimuth) - 62;
+	let a = c_(e.frontAzimuth) - 62;
 	return {
 		group: n,
 		hdri: null,
@@ -19671,16 +19671,16 @@ function c_(e, t) {
 		}
 	};
 }
-function l_(e, t) {
-	if (e !== "studio" && t.lib.hasSync("hdri", `env_${e}`)) return c_(t, `env_${e}`);
+function u_(e, t) {
+	if (e !== "studio" && t.lib.hasSync("hdri", `env_${e}`)) return l_(t, `env_${e}`);
 	switch (e) {
-		case "forest": return r_(t);
-		case "coastal": return i_(t);
-		case "urban": return a_(t);
-		default: return o_(t);
+		case "forest": return i_(t);
+		case "coastal": return a_(t);
+		case "urban": return o_(t);
+		default: return s_(t);
 	}
 }
-function u_(e) {
+function d_(e) {
 	e.traverse((e) => {
 		let t = e;
 		t.geometry && t.geometry.dispose();
@@ -19692,7 +19692,7 @@ function u_(e) {
 	});
 }
 // node_modules/three/examples/jsm/loaders/HDRLoader.js
-var d_ = class extends Xo {
+var f_ = class extends Xo {
 	constructor(e) {
 		super(e), this.type = O;
 	}
@@ -19793,7 +19793,7 @@ var d_ = class extends Xo {
 	setDataType(e) {
 		return this.type = e, this;
 	}
-}, f_ = (function() {
+}, p_ = (function() {
 	var e = "b9H79Tebbbe8Fv9Gbb9Gvuuuuueu9Giuuub9Geueu9Giuuueuixkbeeeddddillviebeoweuecj:Gdkr;Neqo9TW9T9VV95dbH9F9F939H79T9F9J9H229F9Jt9VV7bb8A9TW79O9V9Wt9F9KW9J9V9KW9wWVtW949c919M9MWVbeY9TW79O9V9Wt9F9KW9J9V9KW69U9KW949c919M9MWVbdE9TW79O9V9Wt9F9KW9J9V9KW69U9KW949tWG91W9U9JWbiL9TW79O9V9Wt9F9KW9J9V9KWS9P2tWV9p9JtblK9TW79O9V9Wt9F9KW9J9V9KWS9P2tWV9r919HtbvL9TW79O9V9Wt9F9KW9J9V9KWS9P2tWVT949WboY9TW79O9V9Wt9F9KW9J9V9KWS9P2tWVJ9V29VVbrl79IV9Rbwq:VZkdbk:XYi5ud9:du8Jjjjjbcj;kb9Rgv8Kjjjjbc9:hodnalTmbcuhoaiRbbgrc;WeGc:Ge9hmbarcsGgwce0mbc9:hoalcufadcd4cbawEgDadfgrcKcaawEgqaraq0Egk6mbaicefhxcj;abad9Uc;WFbGcjdadca0EhmaialfgPar9Rgoadfhsavaoadz:jjjjbgzceVhHcbhOdndninaeaO9nmeaPax9RaD6mdamaeaO9RaOamfgoae6EgAcsfglc9WGhCabaOad2fhXaAcethQaxaDfhiaOaeaoaeao6E9RhLalcl4cifcd4hKazcj;cbfaAfhYcbh8AazcjdfhEaHh3incbh5dnawTmbaxa8Acd4fRbbh5kcbh8Eazcj;cbfhqinaih8Fdndndndna5a8Ecet4ciGgoc9:fPdebdkaPa8F9RaA6mrazcj;cbfa8EaA2fa8FaAz:jjjjb8Aa8FaAfhixdkazcj;cbfa8EaA2fcbaAz:kjjjb8Aa8FhixekaPa8F9RaK6mva8FaKfhidnaCTmbaPai9RcK6mbaocdtc:q:G:cjbfcj:G:cjbawEhaczhrcbhlinargoc9Wfghaqfhrdndndndndndnaaa8Fahco4fRbbalcoG4ciGcdtfydbPDbedvivvvlvkar9cb83bwar9cb83bbxlkarcbaiRbdai8Xbb9c:c:qj:bw9:9c:q;c1:I1e:d9c:b:c:e1z9:gg9cjjjjjz:dg8J9qE86bbaqaofgrcGfcbaicdfa8J9c8N1:NfghRbbag9cjjjjjw:dg8J9qE86bbarcVfcbaha8J9c8M1:NfghRbbag9cjjjjjl:dg8J9qE86bbarc7fcbaha8J9c8L1:NfghRbbag9cjjjjjd:dg8J9qE86bbarctfcbaha8J9c8K1:NfghRbbag9cjjjjje:dg8J9qE86bbarc91fcbaha8J9c8J1:NfghRbbag9cjjjj;ab:dg8J9qE86bbarc4fcbaha8J9cg1:NfghRbbag9cjjjja:dg8J9qE86bbarc93fcbaha8J9ch1:NfghRbbag9cjjjjz:dgg9qE86bbarc94fcbahag9ca1:NfghRbbai8Xbe9c:c:qj:bw9:9c:q;c1:I1e:d9c:b:c:e1z9:gg9cjjjjjz:dg8J9qE86bbarc95fcbaha8J9c8N1:NfgiRbbag9cjjjjjw:dg8J9qE86bbarc96fcbaia8J9c8M1:NfgiRbbag9cjjjjjl:dg8J9qE86bbarc97fcbaia8J9c8L1:NfgiRbbag9cjjjjjd:dg8J9qE86bbarc98fcbaia8J9c8K1:NfgiRbbag9cjjjjje:dg8J9qE86bbarc99fcbaia8J9c8J1:NfgiRbbag9cjjjj;ab:dg8J9qE86bbarc9:fcbaia8J9cg1:NfgiRbbag9cjjjja:dg8J9qE86bbarcufcbaia8J9ch1:NfgiRbbag9cjjjjz:dgg9qE86bbaiag9ca1:NfhixikaraiRblaiRbbghco4g8Ka8KciSg8KE86bbaqaofgrcGfaiclfa8Kfg8KRbbahcl4ciGg8La8LciSg8LE86bbarcVfa8Ka8Lfg8KRbbahcd4ciGg8La8LciSg8LE86bbarc7fa8Ka8Lfg8KRbbahciGghahciSghE86bbarctfa8Kahfg8KRbbaiRbeghco4g8La8LciSg8LE86bbarc91fa8Ka8Lfg8KRbbahcl4ciGg8La8LciSg8LE86bbarc4fa8Ka8Lfg8KRbbahcd4ciGg8La8LciSg8LE86bbarc93fa8Ka8Lfg8KRbbahciGghahciSghE86bbarc94fa8Kahfg8KRbbaiRbdghco4g8La8LciSg8LE86bbarc95fa8Ka8Lfg8KRbbahcl4ciGg8La8LciSg8LE86bbarc96fa8Ka8Lfg8KRbbahcd4ciGg8La8LciSg8LE86bbarc97fa8Ka8Lfg8KRbbahciGghahciSghE86bbarc98fa8KahfghRbbaiRbigico4g8Ka8KciSg8KE86bbarc99faha8KfghRbbaicl4ciGg8Ka8KciSg8KE86bbarc9:faha8KfghRbbaicd4ciGg8Ka8KciSg8KE86bbarcufaha8KfgrRbbaiciGgiaiciSgiE86bbaraifhixdkaraiRbwaiRbbghcl4g8Ka8KcsSg8KE86bbaqaofgrcGfaicwfa8Kfg8KRbbahcsGghahcsSghE86bbarcVfa8KahfghRbbaiRbeg8Kcl4g8La8LcsSg8LE86bbarc7faha8LfghRbba8KcsGg8Ka8KcsSg8KE86bbarctfaha8KfghRbbaiRbdg8Kcl4g8La8LcsSg8LE86bbarc91faha8LfghRbba8KcsGg8Ka8KcsSg8KE86bbarc4faha8KfghRbbaiRbig8Kcl4g8La8LcsSg8LE86bbarc93faha8LfghRbba8KcsGg8Ka8KcsSg8KE86bbarc94faha8KfghRbbaiRblg8Kcl4g8La8LcsSg8LE86bbarc95faha8LfghRbba8KcsGg8Ka8KcsSg8KE86bbarc96faha8KfghRbbaiRbvg8Kcl4g8La8LcsSg8LE86bbarc97faha8LfghRbba8KcsGg8Ka8KcsSg8KE86bbarc98faha8KfghRbbaiRbog8Kcl4g8La8LcsSg8LE86bbarc99faha8LfghRbba8KcsGg8Ka8KcsSg8KE86bbarc9:faha8KfghRbbaiRbrgicl4g8Ka8KcsSg8KE86bbarcufaha8KfgrRbbaicsGgiaicsSgiE86bbaraifhixekarai8Pbw83bwarai8Pbb83bbaiczfhikdnaoaC9pmbalcdfhlaoczfhraPai9RcL0mekkaoaC6moaimexokaCmva8FTmvkaqaAfhqa8Ecefg8Ecl9hmbkdndndndnawTmbasa8Acd4fRbbgociGPlbedrbkaATmdaza8Afh8Fazcj;cbfhhcbh8EaEhaina8FRbbhraahocbhlinaoahalfRbbgqce4cbaqceG9R7arfgr86bbaoadfhoaAalcefgl9hmbkaacefhaa8Fcefh8FahaAfhha8Ecefg8Ecl9hmbxikkaATmeaza8Afhaazcj;cbfhhcbhoceh8EaYh8FinaEaofhlaa8Vbbhrcbhoinala8FaofRbbcwtahaofRbbgqVc;:FiGce4cbaqceG9R7arfgr87bbaladfhlaLaocefgofmbka8FaQfh8FcdhoaacdfhaahaQfhha8EceGhlcbh8EalmbxdkkaATmbaocl4h8Eaza8AfRbbhqcwhoa3hlinalRbbaotaqVhqalcefhlaocwfgoca9hmbkcbhhaEh8FaYhainazcj;cbfahfRbbhrcwhoaahlinalRbbaotarVhralaAfhlaocwfgoca9hmbkara8E94aq7hqcbhoa8Fhlinalaqao486bbalcefhlaocwfgoca9hmbka8Fadfh8FaacefhaahcefghaA9hmbkkaEclfhEa3clfh3a8Aclfg8Aad6mbkaXazcjdfaAad2z:jjjjb8AazazcjdfaAcufad2fadz:jjjjb8AaAaOfhOaihxaimbkc9:hoxdkcbc99aPax9RakSEhoxekc9:hokavcj;kbf8Kjjjjbaok:ysezu8Jjjjjbc;ae9Rgv8Kjjjjbc9:hodnalaeci9UgrcHf6mbcuhoaiRbbgwc;WeGc;Ge9hmbawcsGgDce0mbavc;abfcFecjez:kjjjb8Aav9cu83iUav9cu83i8Wav9cu83iyav9cu83iaav9cu83iKav9cu83izav9cu83iwav9cu83ibaialfc9WfhqaicefgwarfhldnaeTmbcmcsaDceSEhkcbhxcbhmcbhrcbhicbhoindnalaq9nmbc9:hoxikdndnawRbbgDc;Ve0mbavc;abfaoaDcu7gPcl4fcsGcitfgsydlhzasydbhHdndnaDcsGgsak9pmbavaiaPfcsGcdtfydbaxasEhDaxasTgOfhxxekdndnascsSmbcehOasc987asamffcefhDxekalcefhDal8SbbgscFeGhPdndnascu9mmbaDhlxekalcvfhlaPcFbGhPcrhsdninaD8SbbgOcFbGastaPVhPaOcu9kmeaDcefhDascrfgsc8J9hmbxdkkaDcefhlkcehOaPce4cbaPceG9R7amfhDkaDhmkavc;abfaocitfgsaDBdbasazBdlavaicdtfaDBdbavc;abfaocefcsGcitfgsaHBdbasaDBdlaocdfhoaOaifhidnadcd9hmbabarcetfgsaH87ebasclfaD87ebascdfaz87ebxdkabarcdtfgsaHBdbascwfaDBdbasclfazBdbxekdnaDcpe0mbavaiaqaDcsGfRbbgscl4gP9RcsGcdtfydbaxcefgOaPEhDavaias9RcsGcdtfydbaOaPTgzfgOascsGgPEhsaPThPdndnadcd9hmbabarcetfgHax87ebaHclfas87ebaHcdfaD87ebxekabarcdtfgHaxBdbaHcwfasBdbaHclfaDBdbkavaicdtfaxBdbavc;abfaocitfgHaDBdbaHaxBdlavaicefgicsGcdtfaDBdbavc;abfaocefcsGcitfgHasBdbaHaDBdlavaiazfgicsGcdtfasBdbavc;abfaocdfcsGcitfgDaxBdbaDasBdlaocifhoaiaPfhiaOaPfhxxekaxcbalRbbgsEgHaDc;:eSgDfhOascsGhAdndnascl4gCmbaOcefhzxekaOhzavaiaC9RcsGcdtfydbhOkdndnaAmbazcefhxxekazhxavaias9RcsGcdtfydbhzkdndnaDTmbalcefhDxekalcdfhDal8SbegPcFeGhsdnaPcu9kmbalcofhHascFbGhscrhldninaD8SbbgPcFbGaltasVhsaPcu9kmeaDcefhDalcrfglc8J9hmbkaHhDxekaDcefhDkasce4cbasceG9R7amfgmhHkdndnaCcsSmbaDhsxekaDcefhsaD8SbbglcFeGhPdnalcu9kmbaDcvfhOaPcFbGhPcrhldninas8SbbgDcFbGaltaPVhPaDcu9kmeascefhsalcrfglc8J9hmbkaOhsxekascefhskaPce4cbaPceG9R7amfgmhOkdndnaAcsSmbashlxekascefhlas8SbbgDcFeGhPdnaDcu9kmbascvfhzaPcFbGhPcrhDdninal8SbbgscFbGaDtaPVhPascu9kmealcefhlaDcrfgDc8J9hmbkazhlxekalcefhlkaPce4cbaPceG9R7amfgmhzkdndnadcd9hmbabarcetfgDaH87ebaDclfaz87ebaDcdfaO87ebxekabarcdtfgDaHBdbaDcwfazBdbaDclfaOBdbkavc;abfaocitfgDaOBdbaDaHBdlavaicdtfaHBdbavc;abfaocefcsGcitfgDazBdbaDaOBdlavaicefgicsGcdtfaOBdbavc;abfaocdfcsGcitfgDaHBdbaDazBdlavaiaCTaCcsSVfgicsGcdtfazBdbaiaATaAcsSVfhiaocifhokawcefhwaocsGhoaicsGhiarcifgrae6mbkkcbc99alaqSEhokavc;aef8Kjjjjbaok:clevu8Jjjjjbcz9Rhvdnalaecvf9pmbc9:skdnaiRbbc;:eGc;qeSmbcuskav9cb83iwaicefhoaialfc98fhrdnaeTmbdnadcdSmbcbhwindnaoar6mbc9:skaocefhlao8SbbgicFeGhddndnaicu9mmbalhoxekaocvfhoadcFbGhdcrhidninal8SbbgDcFbGaitadVhdaDcu9kmealcefhlaicrfgic8J9hmbxdkkalcefhokabawcdtfadc8Etc8F91adcd47avcwfadceGcdtVglydbfgiBdbalaiBdbawcefgwae9hmbxdkkcbhwindnaoar6mbc9:skaocefhlao8SbbgicFeGhddndnaicu9mmbalhoxekaocvfhoadcFbGhdcrhidninal8SbbgDcFbGaitadVhdaDcu9kmealcefhlaicrfgic8J9hmbxdkkalcefhokabawcetfadc8Etc8F91adcd47avcwfadceGcdtVglydbfgi87ebalaiBdbawcefgwae9hmbkkcbc99aoarSEk:Lvoeue99dud99eud99dndnadcl9hmbaeTmeindndnabcdfgd8Sbb:Yab8Sbbgi:Ygl:l:tabcefgv8Sbbgo:Ygr:l:tgwJbb;:9cawawNJbbbbawawJbbbb9GgDEgq:mgkaqaicb9iEalMgwawNakaqaocb9iEarMgqaqNMM:r:vglNJbbbZJbbb:;aDEMgr:lJbbb9p9DTmbar:Ohixekcjjjj94hikadai86bbdndnaqalNJbbbZJbbb:;aqJbbbb9GEMgq:lJbbb9p9DTmbaq:Ohdxekcjjjj94hdkavad86bbdndnawalNJbbbZJbbb:;awJbbbb9GEMgw:lJbbb9p9DTmbaw:Ohdxekcjjjj94hdkabad86bbabclfhbaecufgembxdkkaeTmbindndnabclfgd8Ueb:Yab8Uebgi:Ygl:l:tabcdfgv8Uebgo:Ygr:l:tgwJb;:FSawawNJbbbbawawJbbbb9GgDEgq:mgkaqaicb9iEalMgwawNakaqaocb9iEarMgqaqNMM:r:vglNJbbbZJbbb:;aDEMgr:lJbbb9p9DTmbar:Ohixekcjjjj94hikadai87ebdndnaqalNJbbbZJbbb:;aqJbbbb9GEMgq:lJbbb9p9DTmbaq:Ohdxekcjjjj94hdkavad87ebdndnawalNJbbbZJbbb:;awJbbbb9GEMgw:lJbbb9p9DTmbaw:Ohdxekcjjjj94hdkabad87ebabcwfhbaecufgembkkk:4ioiue99dud99dud99dnaeTmbcbhiabhlindndnal8Uebgv:YgoJ:ji:1Salcof8UebgrciVgw:Y:vgDNJbbbZJbbb:;avcu9kEMgq:lJbbb9p9DTmbaq:Ohkxekcjjjj94hkkalclf8Uebhvalcdf8UebhxalarcefciGcetfak87ebdndnax:YgqaDNJbbbZJbbb:;axcu9kEMgm:lJbbb9p9DTmbam:Ohxxekcjjjj94hxkabaiarciGgkfcd7cetfax87ebdndnav:YgmaDNJbbbZJbbb:;avcu9kEMgP:lJbbb9p9DTmbaP:Ohvxekcjjjj94hvkalarcufciGcetfav87ebdndnawaw2:ZgPaPMaoaoN:taqaqN:tamamN:tgoJbbbbaoJbbbb9GE:raDNJbbbZMgD:lJbbb9p9DTmbaD:Ohrxekcjjjj94hrkalakcetfar87ebalcwfhlaiclfhiaecufgembkkk9mbdnadcd4ae2gdTmbinababydbgecwtcw91:Yaece91cjjj98Gcjjj;8if::NUdbabclfhbadcufgdmbkkk:Tvirud99eudndnadcl9hmbaeTmeindndnabRbbgiabcefgl8Sbbgvabcdfgo8Sbbgrf9R:YJbbuJabcifgwRbbgdce4adVgDcd4aDVgDcl4aDVgD:Z:vgqNJbbbZMgk:lJbbb9p9DTmbak:Ohxxekcjjjj94hxkaoax86bbdndnaraif:YaqNJbbbZMgk:lJbbb9p9DTmbak:Ohoxekcjjjj94hokalao86bbdndnavaifar9R:YaqNJbbbZMgk:lJbbb9p9DTmbak:Ohixekcjjjj94hikabai86bbdndnaDadcetGadceGV:ZaqNJbbbZMgq:lJbbb9p9DTmbaq:Ohdxekcjjjj94hdkawad86bbabclfhbaecufgembxdkkaeTmbindndnab8Vebgiabcdfgl8Uebgvabclfgo8Uebgrf9R:YJbFu9habcofgw8Vebgdce4adVgDcd4aDVgDcl4aDVgDcw4aDVgD:Z:vgqNJbbbZMgk:lJbbb9p9DTmbak:Ohxxekcjjjj94hxkaoax87ebdndnaraif:YaqNJbbbZMgk:lJbbb9p9DTmbak:Ohoxekcjjjj94hokalao87ebdndnavaifar9R:YaqNJbbbZMgk:lJbbb9p9DTmbak:Ohixekcjjjj94hikabai87ebdndnaDadcetGadceGV:ZaqNJbbbZMgq:lJbbb9p9DTmbaq:Ohdxekcjjjj94hdkawad87ebabcwfhbaecufgembkkk9teiucbcbyd:K:G:cjbgeabcifc98GfgbBd:K:G:cjbdndnabZbcztgd9nmbcuhiabad9RcFFifcz4nbcuSmekaehikaik;LeeeudndnaeabVciGTmbabhixekdndnadcz9pmbabhixekabhiinaiaeydbBdbaiclfaeclfydbBdbaicwfaecwfydbBdbaicxfaecxfydbBdbaeczfheaiczfhiadc9Wfgdcs0mbkkadcl6mbinaiaeydbBdbaeclfheaiclfhiadc98fgdci0mbkkdnadTmbinaiaeRbb86bbaicefhiaecefheadcufgdmbkkabk;aeedudndnabciGTmbabhixekaecFeGc:b:c:ew2hldndnadcz9pmbabhixekabhiinaialBdbaicxfalBdbaicwfalBdbaiclfalBdbaiczfhiadc9Wfgdcs0mbkkadcl6mbinaialBdbaiclfhiadc98fgdci0mbkkdnadTmbinaiae86bbaicefhiadcufgdmbkkabkk83dbcj:Gdk8Kbbbbdbbblbbbwbbbbbbbebbbdbbblbbbwbbbbc:K:Gdkl8W:qbb", t = "b9H79TebbbeKl9Gbb9Gvuuuuueu9Giuuub9Geueuixkbbebeeddddilve9Weeeviebeoweuecj:Gdkr;Neqo9TW9T9VV95dbH9F9F939H79T9F9J9H229F9Jt9VV7bb8A9TW79O9V9Wt9F9KW9J9V9KW9wWVtW949c919M9MWVbdY9TW79O9V9Wt9F9KW9J9V9KW69U9KW949c919M9MWVblE9TW79O9V9Wt9F9KW9J9V9KW69U9KW949tWG91W9U9JWbvL9TW79O9V9Wt9F9KW9J9V9KWS9P2tWV9p9JtboK9TW79O9V9Wt9F9KW9J9V9KWS9P2tWV9r919HtbrL9TW79O9V9Wt9F9KW9J9V9KWS9P2tWVT949WbwY9TW79O9V9Wt9F9KW9J9V9KWS9P2tWVJ9V29VVbDl79IV9Rbqq:W9Dklbzik94evu8Jjjjjbcz9Rhbcbheincbhdcbhiinabcwfadfaicjuaead4ceGglE86bbaialfhiadcefgdcw9hmbkaeai86b:q:W:cjbaecitab8Piw83i:q:G:cjbaecefgecjd9hmbkk:JBl8Aud97dur978Jjjjjbcj;kb9Rgv8Kjjjjbc9:hodnalTmbcuhoaiRbbgrc;WeGc:Ge9hmbarcsGgwce0mbc9:hoalcufadcd4cbawEgDadfgrcKcaawEgqaraq0Egk6mbaialfgxar9RhodnadTgmmbavaoad;8qbbkaicefhPcj;abad9Uc;WFbGcjdadca0EhsdndndnadTmbaoadfhzcbhHinaeaH9nmdaxaP9RaD6miabaHad2fhOaPaDfhAasaeaH9RaHasfae6EgCcsfgocl4cifcd4hXavcj;cbfaoc9WGgQcetfhLavcj;cbfaQci2fhKavcj;cbfaQfhYcbh8Aaoc;ab6hEincbh3dnawTmbaPa8Acd4fRbbh3kcbh5avcj;cbfh8Eindndndndna3a5cet4ciGgoc9:fPdebdkaxaA9RaQ6mwdnaQTmbavcj;cbfa5aQ2faAaQ;8qbbkaAaCfhAxdkaQTmeavcj;cbfa5aQ2fcbaQ;8kbxekaxaA9RaX6moaoclVcbawEhraAaXfhocbhidnaEmbaxao9Rc;Gb6mbcbhlina8EalfhidndndndndndnaAalco4fRbbgqciGarfPDbedibledibkaipxbbbbbbbbbbbbbbbbpklbxlkaiaopbblaopbbbg8Fclp:mea8FpmbzeHdOiAlCvXoQrLg8Fcdp:mea8FpmbzeHdOiAlCvXoQrLpxiiiiiiiiiiiiiiiip9ogapxiiiiiiiiiiiiiiiip8Jg8Fp5b9cjF;8;4;W;G;ab9:9cU1:Nghcitpbi:q:G:cjbahRb:q:W:cjbghpsa8Fp5e9cjF;8;4;W;G;ab9:9cU1:Nggcitpbi:q:G:cjbp9UpmbedilvorzHOACXQLpPaaa8Fp9spklbahaoclffagRb:q:W:cjbfhoxikaiaopbbwaopbbbg8Fclp:mea8FpmbzeHdOiAlCvXoQrLpxssssssssssssssssp9ogapxssssssssssssssssp8Jg8Fp5b9cjF;8;4;W;G;ab9:9cU1:Nghcitpbi:q:G:cjbahRb:q:W:cjbghpsa8Fp5e9cjF;8;4;W;G;ab9:9cU1:Nggcitpbi:q:G:cjbp9UpmbedilvorzHOACXQLpPaaa8Fp9spklbahaocwffagRb:q:W:cjbfhoxdkaiaopbbbpklbaoczfhoxekaiaopbbdaoRbbghcitpbi:q:G:cjbahRb:q:W:cjbghpsaoRbeggcitpbi:q:G:cjbp9UpmbedilvorzHOACXQLpPpklbahaocdffagRb:q:W:cjbfhokdndndndndndnaqcd4ciGarfPDbedibledibkaiczfpxbbbbbbbbbbbbbbbbpklbxlkaiczfaopbblaopbbbg8Fclp:mea8FpmbzeHdOiAlCvXoQrLg8Fcdp:mea8FpmbzeHdOiAlCvXoQrLpxiiiiiiiiiiiiiiiip9ogapxiiiiiiiiiiiiiiiip8Jg8Fp5b9cjF;8;4;W;G;ab9:9cU1:Nghcitpbi:q:G:cjbahRb:q:W:cjbghpsa8Fp5e9cjF;8;4;W;G;ab9:9cU1:Nggcitpbi:q:G:cjbp9UpmbedilvorzHOACXQLpPaaa8Fp9spklbahaoclffagRb:q:W:cjbfhoxikaiczfaopbbwaopbbbg8Fclp:mea8FpmbzeHdOiAlCvXoQrLpxssssssssssssssssp9ogapxssssssssssssssssp8Jg8Fp5b9cjF;8;4;W;G;ab9:9cU1:Nghcitpbi:q:G:cjbahRb:q:W:cjbghpsa8Fp5e9cjF;8;4;W;G;ab9:9cU1:Nggcitpbi:q:G:cjbp9UpmbedilvorzHOACXQLpPaaa8Fp9spklbahaocwffagRb:q:W:cjbfhoxdkaiczfaopbbbpklbaoczfhoxekaiczfaopbbdaoRbbghcitpbi:q:G:cjbahRb:q:W:cjbghpsaoRbeggcitpbi:q:G:cjbp9UpmbedilvorzHOACXQLpPpklbahaocdffagRb:q:W:cjbfhokdndndndndndnaqcl4ciGarfPDbedibledibkaicafpxbbbbbbbbbbbbbbbbpklbxlkaicafaopbblaopbbbg8Fclp:mea8FpmbzeHdOiAlCvXoQrLg8Fcdp:mea8FpmbzeHdOiAlCvXoQrLpxiiiiiiiiiiiiiiiip9ogapxiiiiiiiiiiiiiiiip8Jg8Fp5b9cjF;8;4;W;G;ab9:9cU1:Nghcitpbi:q:G:cjbahRb:q:W:cjbghpsa8Fp5e9cjF;8;4;W;G;ab9:9cU1:Nggcitpbi:q:G:cjbp9UpmbedilvorzHOACXQLpPaaa8Fp9spklbahaoclffagRb:q:W:cjbfhoxikaicafaopbbwaopbbbg8Fclp:mea8FpmbzeHdOiAlCvXoQrLpxssssssssssssssssp9ogapxssssssssssssssssp8Jg8Fp5b9cjF;8;4;W;G;ab9:9cU1:Nghcitpbi:q:G:cjbahRb:q:W:cjbghpsa8Fp5e9cjF;8;4;W;G;ab9:9cU1:Nggcitpbi:q:G:cjbp9UpmbedilvorzHOACXQLpPaaa8Fp9spklbahaocwffagRb:q:W:cjbfhoxdkaicafaopbbbpklbaoczfhoxekaicafaopbbdaoRbbghcitpbi:q:G:cjbahRb:q:W:cjbghpsaoRbeggcitpbi:q:G:cjbp9UpmbedilvorzHOACXQLpPpklbahaocdffagRb:q:W:cjbfhokdndndndndndnaqco4arfPDbedibledibkaic8Wfpxbbbbbbbbbbbbbbbbpklbxlkaic8Wfaopbblaopbbbg8Fclp:mea8FpmbzeHdOiAlCvXoQrLg8Fcdp:mea8FpmbzeHdOiAlCvXoQrLpxiiiiiiiiiiiiiiiip9ogapxiiiiiiiiiiiiiiiip8Jg8Fp5b9cjF;8;4;W;G;ab9:9cU1:Ngicitpbi:q:G:cjbaiRb:q:W:cjbgipsa8Fp5e9cjF;8;4;W;G;ab9:9cU1:Ngqcitpbi:q:G:cjbp9UpmbedilvorzHOACXQLpPaaa8Fp9spklbaiaoclffaqRb:q:W:cjbfhoxikaic8Wfaopbbwaopbbbg8Fclp:mea8FpmbzeHdOiAlCvXoQrLpxssssssssssssssssp9ogapxssssssssssssssssp8Jg8Fp5b9cjF;8;4;W;G;ab9:9cU1:Ngicitpbi:q:G:cjbaiRb:q:W:cjbgipsa8Fp5e9cjF;8;4;W;G;ab9:9cU1:Ngqcitpbi:q:G:cjbp9UpmbedilvorzHOACXQLpPaaa8Fp9spklbaiaocwffaqRb:q:W:cjbfhoxdkaic8Wfaopbbbpklbaoczfhoxekaic8WfaopbbdaoRbbgicitpbi:q:G:cjbaiRb:q:W:cjbgipsaoRbegqcitpbi:q:G:cjbp9UpmbedilvorzHOACXQLpPpklbaiaocdffaqRb:q:W:cjbfhokalc;abfhialcjefaQ0meaihlaxao9Rc;Fb0mbkkdnaiaQ9pmbaici4hlinaxao9RcK6mwa8EaifhqdndndndndndnaAaico4fRbbalcoG4ciGarfPDbedibledibkaqpxbbbbbbbbbbbbbbbbpkbbxlkaqaopbblaopbbbg8Fclp:mea8FpmbzeHdOiAlCvXoQrLg8Fcdp:mea8FpmbzeHdOiAlCvXoQrLpxiiiiiiiiiiiiiiiip9ogapxiiiiiiiiiiiiiiiip8Jg8Fp5b9cjF;8;4;W;G;ab9:9cU1:Nghcitpbi:q:G:cjbahRb:q:W:cjbghpsa8Fp5e9cjF;8;4;W;G;ab9:9cU1:Nggcitpbi:q:G:cjbp9UpmbedilvorzHOACXQLpPaaa8Fp9spkbbahaoclffagRb:q:W:cjbfhoxikaqaopbbwaopbbbg8Fclp:mea8FpmbzeHdOiAlCvXoQrLpxssssssssssssssssp9ogapxssssssssssssssssp8Jg8Fp5b9cjF;8;4;W;G;ab9:9cU1:Nghcitpbi:q:G:cjbahRb:q:W:cjbghpsa8Fp5e9cjF;8;4;W;G;ab9:9cU1:Nggcitpbi:q:G:cjbp9UpmbedilvorzHOACXQLpPaaa8Fp9spkbbahaocwffagRb:q:W:cjbfhoxdkaqaopbbbpkbbaoczfhoxekaqaopbbdaoRbbghcitpbi:q:G:cjbahRb:q:W:cjbghpsaoRbeggcitpbi:q:G:cjbp9UpmbedilvorzHOACXQLpPpkbbahaocdffagRb:q:W:cjbfhokalcdfhlaiczfgiaQ6mbkkaohAaoTmoka8EaQfh8Ea5cefg5cl9hmbkdndndndnawTmbaza8Acd4fRbbglciGPlbedwbkaQTmdavcjdfa8Afhlava8Afpbdbh8Jcbhoinalavcj;cbfaofpblbg8KaYaofpblbg8LpmbzeHdOiAlCvXoQrLg8MaLaofpblbg8NaKaofpblbgypmbzeHdOiAlCvXoQrLg8PpmbezHdiOAlvCXorQLg8Fcep9Ta8Fpxeeeeeeeeeeeeeeeegap9op9Hp9rg8Fa8Jp9Ug8Jp9Abbbaladfgla8Ja8Fa8Fpmlvorlvorlvorlvorp9Ug8Jp9Abbbaladfgla8Ja8Fa8FpmwDqkwDqkwDqkwDqkp9Ug8Jp9Abbbaladfgla8Ja8Fa8FpmxmPsxmPsxmPsxmPsp9Ug8Jp9Abbbaladfgla8Ja8Ma8PpmwDKYqk8AExm35Ps8E8Fg8Fcep9Ta8Faap9op9Hp9rg8Fp9Ug8Jp9Abbbaladfgla8Ja8Fa8Fpmlvorlvorlvorlvorp9Ug8Jp9Abbbaladfgla8Ja8Fa8FpmwDqkwDqkwDqkwDqkp9Ug8Jp9Abbbaladfgla8Ja8Fa8FpmxmPsxmPsxmPsxmPsp9Ug8Jp9Abbbaladfgla8Ja8Ka8LpmwKDYq8AkEx3m5P8Es8Fg8Ka8NaypmwKDYq8AkEx3m5P8Es8Fg8LpmbezHdiOAlvCXorQLg8Fcep9Ta8Faap9op9Hp9rg8Fp9Ug8Jp9Abbbaladfgla8Ja8Fa8Fpmlvorlvorlvorlvorp9Ug8Jp9Abbbaladfgla8Ja8Fa8FpmwDqkwDqkwDqkwDqkp9Ug8Jp9Abbbaladfgla8Ja8Fa8FpmxmPsxmPsxmPsxmPsp9Ug8Jp9Abbbaladfgla8Ja8Ka8LpmwDKYqk8AExm35Ps8E8Fg8Fcep9Ta8Faap9op9Hp9rg8Fp9Ugap9Abbbaladfglaaa8Fa8Fpmlvorlvorlvorlvorp9Ugap9Abbbaladfglaaa8Fa8FpmwDqkwDqkwDqkwDqkp9Ugap9Abbbaladfglaaa8Fa8FpmxmPsxmPsxmPsxmPsp9Ug8Jp9AbbbaladfhlaoczfgoaQ6mbxikkaQTmeavcjdfa8Afhlava8Afpbdbh8Jcbhoinalavcj;cbfaofpblbg8KaYaofpblbg8LpmbzeHdOiAlCvXoQrLg8MaLaofpblbg8NaKaofpblbgypmbzeHdOiAlCvXoQrLg8PpmbezHdiOAlvCXorQLg8Fcep:nea8Fpxebebebebebebebebgap9op:bep9rg8Fa8Jp:oeg8Jp9Abbbaladfgla8Ja8Fa8Fpmlvorlvorlvorlvorp:oeg8Jp9Abbbaladfgla8Ja8Fa8FpmwDqkwDqkwDqkwDqkp:oeg8Jp9Abbbaladfgla8Ja8Fa8FpmxmPsxmPsxmPsxmPsp:oeg8Jp9Abbbaladfgla8Ja8Ma8PpmwDKYqk8AExm35Ps8E8Fg8Fcep:nea8Faap9op:bep9rg8Fp:oeg8Jp9Abbbaladfgla8Ja8Fa8Fpmlvorlvorlvorlvorp:oeg8Jp9Abbbaladfgla8Ja8Fa8FpmwDqkwDqkwDqkwDqkp:oeg8Jp9Abbbaladfgla8Ja8Fa8FpmxmPsxmPsxmPsxmPsp:oeg8Jp9Abbbaladfgla8Ja8Ka8LpmwKDYq8AkEx3m5P8Es8Fg8Ka8NaypmwKDYq8AkEx3m5P8Es8Fg8LpmbezHdiOAlvCXorQLg8Fcep:nea8Faap9op:bep9rg8Fp:oeg8Jp9Abbbaladfgla8Ja8Fa8Fpmlvorlvorlvorlvorp:oeg8Jp9Abbbaladfgla8Ja8Fa8FpmwDqkwDqkwDqkwDqkp:oeg8Jp9Abbbaladfgla8Ja8Fa8FpmxmPsxmPsxmPsxmPsp:oeg8Jp9Abbbaladfgla8Ja8Ka8LpmwDKYqk8AExm35Ps8E8Fg8Fcep:nea8Faap9op:bep9rg8Fp:oegap9Abbbaladfglaaa8Fa8Fpmlvorlvorlvorlvorp:oegap9Abbbaladfglaaa8Fa8FpmwDqkwDqkwDqkwDqkp:oegap9Abbbaladfglaaa8Fa8FpmxmPsxmPsxmPsxmPsp:oeg8Jp9AbbbaladfhlaoczfgoaQ6mbxdkkaQTmbcbhocbalcl4gl9Rc8FGhiavcjdfa8Afhrava8Afpbdbhainaravcj;cbfaofpblbg8JaYaofpblbg8KpmbzeHdOiAlCvXoQrLg8LaLaofpblbg8MaKaofpblbg8NpmbzeHdOiAlCvXoQrLgypmbezHdiOAlvCXorQLg8Faip:Rea8Falp:Tep9qg8Faap9rgap9Abbbaradfgraaa8Fa8Fpmlvorlvorlvorlvorp9rgap9Abbbaradfgraaa8Fa8FpmwDqkwDqkwDqkwDqkp9rgap9Abbbaradfgraaa8Fa8FpmxmPsxmPsxmPsxmPsp9rgap9Abbbaradfgraaa8LaypmwDKYqk8AExm35Ps8E8Fg8Faip:Rea8Falp:Tep9qg8Fp9rgap9Abbbaradfgraaa8Fa8Fpmlvorlvorlvorlvorp9rgap9Abbbaradfgraaa8Fa8FpmwDqkwDqkwDqkwDqkp9rgap9Abbbaradfgraaa8Fa8FpmxmPsxmPsxmPsxmPsp9rgap9Abbbaradfgraaa8Ja8KpmwKDYq8AkEx3m5P8Es8Fg8Ja8Ma8NpmwKDYq8AkEx3m5P8Es8Fg8KpmbezHdiOAlvCXorQLg8Faip:Rea8Falp:Tep9qg8Fp9rgap9Abbbaradfgraaa8Fa8Fpmlvorlvorlvorlvorp9rgap9Abbbaradfgraaa8Fa8FpmwDqkwDqkwDqkwDqkp9rgap9Abbbaradfgraaa8Fa8FpmxmPsxmPsxmPsxmPsp9rgap9Abbbaradfgraaa8Ja8KpmwDKYqk8AExm35Ps8E8Fg8Faip:Rea8Falp:Tep9qg8Fp9rgap9Abbbaradfgraaa8Fa8Fpmlvorlvorlvorlvorp9rgap9Abbbaradfgraaa8Fa8FpmwDqkwDqkwDqkwDqkp9rgap9Abbbaradfgraaa8Fa8FpmxmPsxmPsxmPsxmPsp9rgap9AbbbaradfhraoczfgoaQ6mbkka8Aclfg8Aad6mbkdnaCad2goTmbaOavcjdfao;8qbbkdnammbavavcjdfaCcufad2fad;8qbbkaCaHfhHc9:hoaAhPaAmbxlkkaeTmbaDalfhrcbhocuhlinaralaD9RglfaD6mdasaeao9Raoasfae6Eaofgoae6mbkaial9RhPkcbc99axaP9RakSEhoxekc9:hokavcj;kbf8Kjjjjbaokwbz:bjjjbkNsezu8Jjjjjbc;ae9Rgv8Kjjjjbc9:hodnalaeci9UgrcHf6mbcuhoaiRbbgwc;WeGc;Ge9hmbawcsGgDce0mbavc;abfcFecje;8kbav9cu83iUav9cu83i8Wav9cu83iyav9cu83iaav9cu83iKav9cu83izav9cu83iwav9cu83ibaialfc9WfhqaicefgwarfhldnaeTmbcmcsaDceSEhkcbhxcbhmcbhrcbhicbhoindnalaq9nmbc9:hoxikdndnawRbbgDc;Ve0mbavc;abfaoaDcu7gPcl4fcsGcitfgsydlhzasydbhHdndnaDcsGgsak9pmbavaiaPfcsGcdtfydbaxasEhDaxasTgOfhxxekdndnascsSmbcehOasc987asamffcefhDxekalcefhDal8SbbgscFeGhPdndnascu9mmbaDhlxekalcvfhlaPcFbGhPcrhsdninaD8SbbgOcFbGastaPVhPaOcu9kmeaDcefhDascrfgsc8J9hmbxdkkaDcefhlkcehOaPce4cbaPceG9R7amfhDkaDhmkavc;abfaocitfgsaDBdbasazBdlavaicdtfaDBdbavc;abfaocefcsGcitfgsaHBdbasaDBdlaocdfhoaOaifhidnadcd9hmbabarcetfgsaH87ebasclfaD87ebascdfaz87ebxdkabarcdtfgsaHBdbascwfaDBdbasclfazBdbxekdnaDcpe0mbavaiaqaDcsGfRbbgscl4gP9RcsGcdtfydbaxcefgOaPEhDavaias9RcsGcdtfydbaOaPTgzfgOascsGgPEhsaPThPdndnadcd9hmbabarcetfgHax87ebaHclfas87ebaHcdfaD87ebxekabarcdtfgHaxBdbaHcwfasBdbaHclfaDBdbkavaicdtfaxBdbavc;abfaocitfgHaDBdbaHaxBdlavaicefgicsGcdtfaDBdbavc;abfaocefcsGcitfgHasBdbaHaDBdlavaiazfgicsGcdtfasBdbavc;abfaocdfcsGcitfgDaxBdbaDasBdlaocifhoaiaPfhiaOaPfhxxekaxcbalRbbgsEgHaDc;:eSgDfhOascsGhAdndnascl4gCmbaOcefhzxekaOhzavaiaC9RcsGcdtfydbhOkdndnaAmbazcefhxxekazhxavaias9RcsGcdtfydbhzkdndnaDTmbalcefhDxekalcdfhDal8SbegPcFeGhsdnaPcu9kmbalcofhHascFbGhscrhldninaD8SbbgPcFbGaltasVhsaPcu9kmeaDcefhDalcrfglc8J9hmbkaHhDxekaDcefhDkasce4cbasceG9R7amfgmhHkdndnaCcsSmbaDhsxekaDcefhsaD8SbbglcFeGhPdnalcu9kmbaDcvfhOaPcFbGhPcrhldninas8SbbgDcFbGaltaPVhPaDcu9kmeascefhsalcrfglc8J9hmbkaOhsxekascefhskaPce4cbaPceG9R7amfgmhOkdndnaAcsSmbashlxekascefhlas8SbbgDcFeGhPdnaDcu9kmbascvfhzaPcFbGhPcrhDdninal8SbbgscFbGaDtaPVhPascu9kmealcefhlaDcrfgDc8J9hmbkazhlxekalcefhlkaPce4cbaPceG9R7amfgmhzkdndnadcd9hmbabarcetfgDaH87ebaDclfaz87ebaDcdfaO87ebxekabarcdtfgDaHBdbaDcwfazBdbaDclfaOBdbkavc;abfaocitfgDaOBdbaDaHBdlavaicdtfaHBdbavc;abfaocefcsGcitfgDazBdbaDaOBdlavaicefgicsGcdtfaOBdbavc;abfaocdfcsGcitfgDaHBdbaDazBdlavaiaCTaCcsSVfgicsGcdtfazBdbaiaATaAcsSVfhiaocifhokawcefhwaocsGhoaicsGhiarcifgrae6mbkkcbc99alaqSEhokavc;aef8Kjjjjbaok:clevu8Jjjjjbcz9Rhvdnalaecvf9pmbc9:skdnaiRbbc;:eGc;qeSmbcuskav9cb83iwaicefhoaialfc98fhrdnaeTmbdnadcdSmbcbhwindnaoar6mbc9:skaocefhlao8SbbgicFeGhddndnaicu9mmbalhoxekaocvfhoadcFbGhdcrhidninal8SbbgDcFbGaitadVhdaDcu9kmealcefhlaicrfgic8J9hmbxdkkalcefhokabawcdtfadc8Etc8F91adcd47avcwfadceGcdtVglydbfgiBdbalaiBdbawcefgwae9hmbxdkkcbhwindnaoar6mbc9:skaocefhlao8SbbgicFeGhddndnaicu9mmbalhoxekaocvfhoadcFbGhdcrhidninal8SbbgDcFbGaitadVhdaDcu9kmealcefhlaicrfgic8J9hmbxdkkalcefhokabawcetfadc8Etc8F91adcd47avcwfadceGcdtVglydbfgi87ebalaiBdbawcefgwae9hmbkkcbc99aoarSEk;Toio97eue97aec98Ghedndnadcl9hmbaeTmecbhdinababpbbbgicKp:RecKp:Sep;6eglaicwp:RecKp:Sep;6ealp;Geaiczp:RecKp:Sep;6egvp;Gep;Kep;Legopxbbbbbbbbbbbbbbbbp:2egralpxbbbjbbbjbbbjbbbjgwp9op9rp;Keglpxbb;:9cbb;:9cbb;:9cbb;:9calalp;Meaoaop;Meavaravawp9op9rp;Keglalp;Mep;Kep;Kep;Jep;Negvp;Mepxbbn0bbn0bbn0bbn0grp;KepxFbbbFbbbFbbbFbbbp9oaipxbbbFbbbFbbbFbbbFp9op9qalavp;Mearp;Kecwp:RepxbFbbbFbbbFbbbFbbp9op9qaoavp;Mearp;Keczp:RepxbbFbbbFbbbFbbbFbp9op9qpkbbabczfhbadclfgdae6mbxdkkaeTmbcbhdinabczfgDaDpbbbgipxbbbbbbFFbbbbbbFFgwp9oabpbbbgoaipmbediwDqkzHOAKY8AEgvczp:Reczp:Sep;6eglaoaipmlvorxmPsCXQL358E8FpxFubbFubbFubbFubbp9op;6eavczp:Sep;6egvp;Gealp;Gep;Kep;Legipxbbbbbbbbbbbbbbbbp:2egralpxbbbjbbbjbbbjbbbjgqp9op9rp;Keglpxb;:FSb;:FSb;:FSb;:FSalalp;Meaiaip;Meavaravaqp9op9rp;Keglalp;Mep;Kep;Kep;Jep;Negvp;Mepxbbn0bbn0bbn0bbn0grp;KepxFFbbFFbbFFbbFFbbp9oaiavp;Mearp;Keczp:Rep9qgialavp;Mearp;KepxFFbbFFbbFFbbFFbbp9oglpmwDKYqk8AExm35Ps8E8Fp9qpkbbabaoawp9oaialpmbezHdiOAlvCXorQLp9qpkbbabcafhbadclfgdae6mbkkk;2ileue97euo97dnaec98GgiTmbcbheinabcKfpx:ji:1S:ji:1S:ji:1S:ji:1SabpbbbglabczfgvpbbbgopmlvorxmPsCXQL358E8Fgrczp:Segwpxibbbibbbibbbibbbp9qp;6egDp;NegqaDaDp;MegDaDp;KealaopmbediwDqkzHOAKY8AEgDczp:Reczp:Sep;6eglalp;MeaDczp:Sep;6egoaop;Mearczp:Reczp:Sep;6egrarp;Mep;Kep;Kep;Lepxbbbbbbbbbbbbbbbbp:4ep;Jep;Mepxbbn0bbn0bbn0bbn0gDp;KepxFFbbFFbbFFbbFFbbgkp9oaqaop;MeaDp;Keczp:Rep9qgoaqalp;MeaDp;Keakp9oaqarp;MeaDp;Keczp:Rep9qgDpmwDKYqk8AExm35Ps8E8Fglp5eawclp:RegqpEi:T:j83ibavalp5baqpEd:T:j83ibabcwfaoaDpmbezHdiOAlvCXorQLgDp5eaqpEe:T:j83ibabaDp5baqpEb:T:j83ibabcafhbaeclfgeai6mbkkkuee97dnadcd4ae2c98GgeTmbcbhdinababpbbbgicwp:Recwp:Sep;6eaicep:SepxbbjFbbjFbbjFbbjFp9opxbbjZbbjZbbjZbbjZp:Uep;Mepkbbabczfhbadclfgdae6mbkkk:Sodw97euaec98Ghedndnadcl9hmbaeTmecbhdinabpxbbuJbbuJbbuJbbuJabpbbbgicKp:TeglaicYp:Tep9qgvcdp:Teavp9qgvclp:Teavp9qgop;6ep;Negvaicwp:RecKp:SegraipxFbbbFbbbFbbbFbbbgwp9ogDp:Uep;6ep;Mepxbbn0bbn0bbn0bbn0gqp;Kecwp:RepxbFbbbFbbbFbbbFbbp9oavaDarp:Xeaiczp:RecKp:Segip:Uep;6ep;Meaqp;Keawp9op9qavaDaraip:Uep:Xep;6ep;Meaqp;Keczp:RepxbbFbbbFbbbFbbbFbp9op9qavaoalcep:Rep9oalpxebbbebbbebbbebbbp9op9qp;6ep;Meaqp;KecKp:Rep9qpkbbabczfhbadclfgdae6mbxdkkaeTmbcbhdinabczfgkpxbFu9hbFu9hbFu9hbFu9habpbbbglakpbbbgrpmlvorxmPsCXQL358E8Fgvczp:TegqavcHp:Tep9qgicdp:Teaip9qgiclp:Teaip9qgicwp:Teaip9qgop;6ep;NegialarpmbediwDqkzHOAKY8AEgDpxFFbbFFbbFFbbFFbbglp9ograDczp:Segwp:Ueavczp:Reczp:SegDp:Xep;6ep;Mepxbbn0bbn0bbn0bbn0gvp;Kealp9oaiarawaDp:Uep:Xep;6ep;Meavp;Keczp:Rep9qgwaiaoaqcep:Rep9oaqpxebbbebbbebbbebbbp9op9qp;6ep;Meavp;Keczp:ReaiaDarp:Uep;6ep;Meavp;Kealp9op9qgipmwDKYqk8AExm35Ps8E8FpkbbabawaipmbezHdiOAlvCXorQLpkbbabcafhbadclfgdae6mbkkk9teiucbcbydj:G:cjbgeabcifc98GfgbBdj:G:cjbdndnabZbcztgd9nmbcuhiabad9RcFFifcz4nbcuSmekaehikaikkxebcj:Gdklz:zbb", n = new Uint8Array([
 		0,
 		97,
@@ -20017,7 +20017,7 @@ var d_ = class extends Xo {
 			});
 		}
 	};
-})(), p_ = class {
+})(), m_ = class {
 	pending() {
 		return this.inflight;
 	}
@@ -20084,10 +20084,10 @@ var d_ = class extends Xo {
 		return t || (t = (async () => {
 			if (!await this.has("hdri", e)) return null;
 			try {
-				let t = await new d_().setDataType(D).loadAsync(`${this.base}hdri/${e}.hdr`);
+				let t = await new f_().setDataType(D).loadAsync(`${this.base}hdri/${e}.hdr`);
 				return t.mapping = 303, {
 					texture: t,
-					...m_(t)
+					...h_(t)
 				};
 			} catch {
 				return null;
@@ -20099,16 +20099,16 @@ var d_ = class extends Xo {
 		return t || (t = (async () => {
 			if (!await this.has("models", e)) return null;
 			try {
-				let t = await new Ud().setMeshoptDecoder(f_).loadAsync(`${this.base}models/${e}.glb`), n = [];
+				let t = await new Ud().setMeshoptDecoder(p_).loadAsync(`${this.base}models/${e}.glb`), n = [];
 				t.scene.updateMatrixWorld(!0);
 				let r = -Infinity, i = Infinity;
 				t.scene.traverse((e) => {
 					let t = e;
 					if (!t.isMesh) return;
-					let a = h_(t.geometry).applyMatrix4(t.matrixWorld);
+					let a = g_(t.geometry).applyMatrix4(t.matrixWorld);
 					a.computeBoundingBox(), r = Math.max(r, a.boundingBox.max.y), i = Math.min(i, a.boundingBox.min.y);
 					let o = Array.isArray(t.material) ? t.material[0] : t.material;
-					(o.alphaTest > 0 || o.transparent) && (o.transparent = !1, o.alphaTest = .4, o.alphaToCoverage = !1, o.side = 2, o.map && g_(o.map, .4)), n.push({
+					(o.alphaTest > 0 || o.transparent) && (o.transparent = !1, o.alphaTest = .4, o.alphaToCoverage = !1, o.side = 2, o.map && __(o.map, .4)), n.push({
 						geometry: a,
 						material: o
 					});
@@ -20124,7 +20124,7 @@ var d_ = class extends Xo {
 		})(), this.models.set(e, this.track(t))), t;
 	}
 };
-function m_(e) {
+function h_(e) {
 	let { width: t, height: n } = e.image, r = e.image.data, i = r.length / (t * n), a = -1, o = 0, s = 0;
 	for (let e = 0; e < n / 2; e++) for (let n = 0; n < t; n++) {
 		let c = (e * t + n) * i, l = r[c] * .2126 + r[c + 1] * .7152 + r[c + 2] * .0722;
@@ -20176,7 +20176,7 @@ function m_(e) {
 		ground: new J(m[0] / 4, m[1] / 4, m[2] / 4)
 	};
 }
-function h_(e) {
+function g_(e) {
 	let t = new Wr();
 	for (let [n, r] of Object.entries(e.attributes)) {
 		let e = r.count, i = r.itemSize, a = new Float32Array(e * i);
@@ -20185,7 +20185,7 @@ function h_(e) {
 	}
 	return e.index && t.setIndex(e.index.clone()), t;
 }
-function g_(e, t) {
+function __(e, t) {
 	let n = e.image;
 	if (!n || typeof document > "u" || !n.width) return;
 	let r = document.createElement("canvas");
@@ -20219,7 +20219,7 @@ function g_(e, t) {
 	e.mipmaps = c, e.generateMipmaps = !1, e.needsUpdate = !0;
 }
 // node_modules/three/examples/jsm/objects/GroundedSkybox.js
-var __ = class extends Y {
+var v_ = class extends Y {
 	constructor(e, t, n, r = 128) {
 		if (t <= 0 || n <= 0 || r <= 0) throw Error("THREE.GroundedSkybox: height, radius, and resolution must be positive.");
 		let i = new Xa(n, 2 * r, r);
@@ -20236,7 +20236,7 @@ var __ = class extends Y {
 	}
 };
 // src/core/dxf/color.ts
-function v_(e, t, n) {
+function y_(e, t, n) {
 	let r = n * t, i = e % 360 / 60, a = r * (1 - Math.abs(i % 2 - 1)), o = 0, s = 0, c = 0;
 	i < 1 ? [o, s, c] = [
 		r,
@@ -20266,13 +20266,13 @@ function v_(e, t, n) {
 	let l = n - r, u = (e) => Math.floor(e + 1e-6);
 	return u(o + l) << 16 | u(s + l) << 8 | u(c + l);
 }
-var y_ = [
+var b_ = [
 	255,
 	204,
 	153,
 	127,
 	76
-], b_ = {
+], x_ = {
 	1: 16711680,
 	2: 16776960,
 	3: 65280,
@@ -20291,15 +20291,15 @@ var y_ = [
 };
 (() => {
 	let e = Array(256).fill(16777215);
-	for (let t = 1; t < 256; t++) if (b_[t] !== void 0) e[t] = b_[t];
+	for (let t = 1; t < 256; t++) if (x_[t] !== void 0) e[t] = x_[t];
 	else if (t >= 10 && t <= 249) {
 		let n = Math.floor(t / 10) - 1, r = t % 10;
-		e[t] = v_(n * 15, r % 2 == 0 ? 1 : .5, y_[Math.floor(r / 2)]);
+		e[t] = y_(n * 15, r % 2 == 0 ? 1 : .5, b_[Math.floor(r / 2)]);
 	}
 	return e;
 })();
 // src/core/zones.ts
-function x_(e, t, n) {
+function S_(e, t, n) {
 	let r = !1;
 	for (let i = 0, a = n.length - 1; i < n.length; a = i++) {
 		let [o, s] = n[i], [c, l] = n[a];
@@ -20308,7 +20308,7 @@ function x_(e, t, n) {
 	return r;
 }
 // src/viewer/hud.ts
-var S_ = {
+var C_ = {
 	de: {
 		walk: "Begehen",
 		orbit: "Umsehen",
@@ -20321,7 +20321,7 @@ var S_ = {
 		balanced: "Ausgewogen",
 		ultra: "Ultra",
 		hintWalk: "Klicken zum Starten · W A S D gehen · Maus umsehen · Shift schneller · Esc beenden",
-		hintTouch: "Linke Hälfte: gehen · Rechte Hälfte: umsehen",
+		hintTouch: "Joystick: gehen · Wischen: umsehen",
 		hintOrbit: "Ziehen zum Drehen · Mausrad zoomen · „Begehen“ für die Ich-Perspektive",
 		loading: "Modell wird geladen",
 		webgl: "Dieser Browser kann keine 3D-Grafik (WebGL2) anzeigen."
@@ -20338,19 +20338,19 @@ var S_ = {
 		balanced: "Balanced",
 		ultra: "Ultra",
 		hintWalk: "Click to start · W A S D to walk · mouse to look · Shift to run · Esc to stop",
-		hintTouch: "Left half: walk · Right half: look",
+		hintTouch: "Joystick: walk · Swipe: look around",
 		hintOrbit: "Drag to rotate · scroll to zoom · “Walk” for first-person",
 		loading: "Loading model",
 		webgl: "This browser cannot display 3D graphics (WebGL2)."
 	}
 };
-function C_(e, t) {
-	return S_[e][t] ?? S_.de[t];
+function w_(e, t) {
+	return C_[e][t] ?? C_.de[t];
 }
-var w_ = "\n.av-root{position:relative;overflow:hidden;background:#111;touch-action:none;--av-accent:var(--accent,#c9a96e);--av-font:\"Inter\",\"Segoe UI\",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif}\n.av-canvas{display:block;width:100%;height:100%;outline:none}\n.av-root.av-fade::after{opacity:1}\n.av-root::after{content:\"\";position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;transition:opacity .6s}\n.av-hotspots{position:absolute;inset:0;pointer-events:none}\n.av-hs{position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--av-accent);color:#fff;font:600 13px/1 var(--av-font);\n  display:flex;align-items:center;justify-content:center;pointer-events:auto;cursor:pointer;box-shadow:0 0 0 6px rgba(255,255,255,.25),0 4px 14px rgba(0,0,0,.35);transition:box-shadow .2s}\n.av-hs:hover{box-shadow:0 0 0 10px rgba(255,255,255,.35),0 4px 18px rgba(0,0,0,.45)}\n.av-hud{position:absolute;inset:0;pointer-events:none;font:14px/1.4 var(--av-font);color:#fff}\n.av-bar{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);display:flex;gap:6px;align-items:center;justify-content:center;\n  max-width:calc(100% - 24px);padding:6px;flex-wrap:nowrap;border-radius:14px;background:rgba(18,18,20,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);pointer-events:auto}\n.av-b{appearance:none;border:0;background:transparent;color:#fff;font:inherit;padding:8px 12px;border-radius:10px;cursor:pointer;white-space:nowrap}\n.av-b:hover{background:rgba(255,255,255,.12)}\n.av-b.on{background:var(--av-accent);color:#fff}\n.av-sep{width:1px;height:22px;background:rgba(255,255,255,.2);margin:0 2px}\n.av-levels{position:absolute;left:16px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:4px;max-height:70%;overflow:auto;padding:6px;border-radius:14px;background:rgba(18,18,20,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);pointer-events:auto}\n.av-lv{text-align:left;font-size:13px}\n.av-hsep{height:1px;background:rgba(255,255,255,.2);margin:4px 6px}\n.av-place::before{content:\"◉ \";color:var(--av-accent);font-size:10px}\n.av-hint{position:absolute;left:50%;top:14px;transform:translateX(-50%);font-size:12.5px;opacity:.85;text-shadow:0 1px 6px rgba(0,0,0,.6);text-align:center;width:90%}\n.av-locked .av-hint{opacity:0;transition:opacity 1s}\n.av-panel{position:absolute;right:16px;top:16px;width:min(360px,calc(100% - 32px));max-height:calc(100% - 120px);overflow:auto;padding:22px 22px 18px;border-radius:16px;\n  background:rgba(255,255,255,.94);color:#1b1b1b;box-shadow:0 20px 60px rgba(0,0,0,.35);pointer-events:auto;transform:translateX(120%);transition:transform .35s cubic-bezier(.2,.8,.2,1)}\n.av-panel.open{transform:none}\n.av-panel h3{margin:0 28px 10px 0;font-size:20px}\n.av-panel img{width:100%;border-radius:10px;margin:6px 0 10px}\n.av-panel ul{padding-left:18px;color:#555;font-size:13px}\n.av-panel .av-spec{font-size:13px;padding:8px 10px;border-left:3px solid var(--av-accent);background:rgba(0,0,0,.04)}\n.av-x{position:absolute;right:12px;top:10px;border:0;background:none;font-size:24px;cursor:pointer;color:#666}\n.av-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#fff;font:15px system-ui,sans-serif;background:#111;z-index:5;transition:opacity .6s}\n.av-loading .av-track{width:220px;height:3px;background:rgba(255,255,255,.2);border-radius:2px;overflow:hidden}\n.av-loading .av-fill{height:100%;width:0;background:var(--av-accent);transition:width .2s}\n@media (max-width:640px){.av-b{padding:7px 8px;font-size:12.5px}.av-bar{gap:2px;max-width:calc(100% - 16px)}.av-q,.av-sep{display:none!important}.av-bar{bottom:10px}.av-levels{top:auto;bottom:70px;transform:none;left:10px}}\n";
+var T_ = "\n.av-root{position:relative;overflow:hidden;background:#111;touch-action:none;--av-accent:var(--accent,#c9a96e);--av-font:\"Inter\",\"Segoe UI\",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif}\n.av-canvas{display:block;width:100%;height:100%;outline:none}\n.av-root.av-fade::after{opacity:1}\n.av-root::after{content:\"\";position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;transition:opacity .6s}\n.av-hotspots{position:absolute;inset:0;pointer-events:none}\n.av-hs{position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--av-accent);color:#fff;font:600 13px/1 var(--av-font);\n  display:flex;align-items:center;justify-content:center;pointer-events:auto;cursor:pointer;box-shadow:0 0 0 6px rgba(255,255,255,.25),0 4px 14px rgba(0,0,0,.35);transition:box-shadow .2s}\n.av-hs:hover{box-shadow:0 0 0 10px rgba(255,255,255,.35),0 4px 18px rgba(0,0,0,.45)}\n.av-hud{position:absolute;inset:0;pointer-events:none;font:14px/1.4 var(--av-font);color:#fff}\n.av-bar{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);display:flex;gap:6px;align-items:center;justify-content:center;\n  max-width:calc(100% - 24px);padding:6px;flex-wrap:nowrap;border-radius:14px;background:rgba(18,18,20,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);pointer-events:auto}\n.av-b{appearance:none;border:0;background:transparent;color:#fff;font:inherit;padding:8px 12px;border-radius:10px;cursor:pointer;white-space:nowrap}\n.av-b:hover{background:rgba(255,255,255,.12)}\n.av-b.on{background:var(--av-accent);color:#fff}\n.av-sep{width:1px;height:22px;background:rgba(255,255,255,.2);margin:0 2px}\n.av-levels{position:absolute;left:16px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:4px;max-height:70%;overflow:auto;padding:6px;border-radius:14px;background:rgba(18,18,20,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);pointer-events:auto}\n.av-lv{text-align:left;font-size:13px}\n.av-hsep{height:1px;background:rgba(255,255,255,.2);margin:4px 6px}\n.av-place::before{content:\"◉ \";color:var(--av-accent);font-size:10px}\n.av-hint{position:absolute;left:50%;top:14px;transform:translateX(-50%);font-size:12.5px;opacity:.85;text-shadow:0 1px 6px rgba(0,0,0,.6);text-align:center;width:90%}\n.av-locked .av-hint{opacity:0;transition:opacity 1s}\n.av-panel{position:absolute;right:16px;top:16px;width:min(360px,calc(100% - 32px));max-height:calc(100% - 120px);overflow:auto;padding:22px 22px 18px;border-radius:16px;\n  background:rgba(255,255,255,.94);color:#1b1b1b;box-shadow:0 20px 60px rgba(0,0,0,.35);pointer-events:auto;transform:translateX(120%);transition:transform .35s cubic-bezier(.2,.8,.2,1)}\n.av-panel.open{transform:none}\n.av-panel h3{margin:0 28px 10px 0;font-size:20px}\n.av-panel img{width:100%;border-radius:10px;margin:6px 0 10px}\n.av-panel ul{padding-left:18px;color:#555;font-size:13px}\n.av-panel .av-spec{font-size:13px;padding:8px 10px;border-left:3px solid var(--av-accent);background:rgba(0,0,0,.04)}\n.av-x{position:absolute;right:12px;top:10px;border:0;background:none;font-size:24px;cursor:pointer;color:#666}\n.av-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#fff;font:15px system-ui,sans-serif;background:#111;z-index:5;transition:opacity .6s}\n.av-loading .av-track{width:220px;height:3px;background:rgba(255,255,255,.2);border-radius:2px;overflow:hidden}\n.av-loading .av-fill{height:100%;width:0;background:var(--av-accent);transition:width .2s}\n.av-joy{position:absolute;left:22px;bottom:78px;width:124px;height:124px;border-radius:50%;background:rgba(18,18,20,.38);border:1.5px solid rgba(255,255,255,.35);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;place-items:center;pointer-events:auto;touch-action:none;z-index:3}\n.av-knob{width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.88);box-shadow:0 4px 14px rgba(0,0,0,.35);transition:transform .12s ease-out;pointer-events:none}\n.av-joy.on .av-knob{transition:none;background:var(--av-accent)}\n@media (pointer:coarse){.av-walking .av-joy{display:grid}.av-walking .av-levels{top:52px;bottom:auto;transform:none;max-height:calc(100% - 300px);min-height:84px}}\n.av-pseudo-fs{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;height:100dvh!important;max-height:none!important;min-height:0!important;margin:0!important;border-radius:0!important;outline:0!important;z-index:2147483000!important}\nhtml.av-noscroll,html.av-noscroll body{overflow:hidden!important}\n:fullscreen [data-archvista],.av-pseudo-fs [data-archvista]{border-radius:0}\n@media (max-width:640px){.av-b{padding:7px 8px;font-size:12.5px}.av-bar{gap:2px;max-width:calc(100% - 16px)}.av-q,.av-sep{display:none!important}.av-bar{bottom:10px}.av-levels{top:auto;bottom:70px;transform:none;left:10px}}\n";
 // src/viewer/viewer.ts
 Y.prototype.raycast = gg;
-var T_ = class {
+var E_ = class {
 	get paused() {
 		return this._paused;
 	}
@@ -20361,7 +20361,16 @@ var T_ = class {
 		$(this, "container", void 0), $(this, "opts", void 0), $(this, "renderer", void 0), $(this, "scene", new Gn()), $(this, "camera", new ds(70, 1, .05, 6e3)), $(this, "composer", void 0), $(this, "aoPass", null), $(this, "sky", null), $(this, "sun", new vs("#ffffff", 3)), $(this, "hemi", new $o("#ffffff", "#444444", .5)), $(this, "pmrem", void 0), $(this, "envTex", null), $(this, "building", new In()), $(this, "envGroup", null), $(this, "envRes", null), $(this, "walker", null), $(this, "orbit", void 0), $(this, "clock", new Es()), $(this, "keys", /* @__PURE__ */ new Set()), $(this, "touchMove", {
 			x: 0,
 			z: 0
-		}), $(this, "config", null), $(this, "tier", "balanced"), $(this, "quality", "auto"), $(this, "raf", 0), $(this, "disposed", !1), $(this, "hudEl", null), $(this, "hsLayer", void 0), $(this, "hsEls", /* @__PURE__ */ new Map()), $(this, "hotspots", []), $(this, "clipPlane", new Qr(new W(0, -1, 0), 1e6)), $(this, "tour", null), $(this, "camAnim", null), $(this, "frameTimes", []), $(this, "adaptiveDone", !1), $(this, "dirty", 5), $(this, "lastCam", /* @__PURE__ */ new Float64Array(16)), $(this, "lastRenderAt", 0), $(this, "stepUps", 0), $(this, "wasLoading", !1), $(this, "framesDrawn", 0), $(this, "lastOrbitPos", new W()), $(this, "bvhForPick", null), $(this, "mats", /* @__PURE__ */ new Map()), $(this, "mode", "orbit"), $(this, "_paused", !1), $(this, "maxFps", 0), $(this, "lastFrame", 0), $(this, "lang", void 0), $(this, "resizeObs", void 0), $(this, "cinematic", void 0), $(this, "lib", void 0), $(this, "envGen", 0), $(this, "roomLights", []), $(this, "skybox", null), $(this, "frame", 0), $(this, "cleanup", []), $(this, "loop", () => {
+		}), $(this, "config", null), $(this, "tier", "balanced"), $(this, "quality", "auto"), $(this, "raf", 0), $(this, "disposed", !1), $(this, "hudEl", null), $(this, "hsLayer", void 0), $(this, "hsEls", /* @__PURE__ */ new Map()), $(this, "hotspots", []), $(this, "clipPlane", new Qr(new W(0, -1, 0), 1e6)), $(this, "tour", null), $(this, "camAnim", null), $(this, "frameTimes", []), $(this, "adaptiveDone", !1), $(this, "dirty", 5), $(this, "lastCam", /* @__PURE__ */ new Float64Array(16)), $(this, "lastRenderAt", 0), $(this, "stepUps", 0), $(this, "wasLoading", !1), $(this, "framesDrawn", 0), $(this, "lastOrbitPos", new W()), $(this, "bvhForPick", null), $(this, "mats", /* @__PURE__ */ new Map()), $(this, "mode", "orbit"), $(this, "_paused", !1), $(this, "maxFps", 0), $(this, "lastFrame", 0), $(this, "lang", void 0), $(this, "resizeObs", void 0), $(this, "cinematic", void 0), $(this, "lib", void 0), $(this, "envGen", 0), $(this, "roomLights", []), $(this, "skybox", null), $(this, "hlGroup", new In()), $(this, "hlMat", new oi({
+			color: "#5d6db0",
+			transparent: !0,
+			opacity: .45,
+			depthWrite: !1,
+			polygonOffset: !0,
+			polygonOffsetFactor: -2,
+			polygonOffsetUnits: -2,
+			side: 2
+		})), $(this, "hlKey", null), $(this, "onPartPick", null), $(this, "frame", 0), $(this, "cleanup", []), $(this, "loop", () => {
 			if (this.disposed || (this.raf = requestAnimationFrame(this.loop), this.paused || this.xrRig)) return;
 			if (this.maxFps > 0) {
 				let e = performance.now();
@@ -20400,7 +20409,7 @@ var T_ = class {
 			this.dirty > 0 && this.dirty--, this.lastCam.set(n);
 			let a = performance.now(), o = this.lastRenderAt ? a - this.lastRenderAt : 0;
 			this.lastRenderAt = a, this.updateHotspots(), this.composer.render(e), this.framesDrawn++, r && this.movedLast && o > 0 && o < 1500 && this.adapt(o / 1e3), this.movedLast = r;
-		}), $(this, "slowStreak", 0), $(this, "movedLast", !1), $(this, "xrRig", null), $(this, "xrSnapReady", !0), $(this, "xrSaved", null), this.container = e, this.opts = t, this.lang = t.language ?? "de", this.cinematic = !!t.cinematic, this.lib = new p_(t.assetBase ?? null), this.renderer = new dd({
+		}), $(this, "slowStreak", 0), $(this, "movedLast", !1), $(this, "pseudoFsOff", null), $(this, "xrRig", null), $(this, "xrSnapReady", !0), $(this, "xrSaved", null), this.container = e, this.opts = t, this.lang = t.language ?? "de", this.cinematic = !!t.cinematic, this.lib = new m_(t.assetBase ?? null), this.renderer = new dd({
 			antialias: !1,
 			powerPreference: "high-performance",
 			preserveDrawingBuffer: !!t.preserveDrawingBuffer,
@@ -20409,7 +20418,7 @@ var T_ = class {
 		let n = this.renderer.domElement;
 		if (n.className = "av-canvas", n.tabIndex = 0, e.classList.add("av-root"), e.appendChild(n), !document.getElementById("av-hud-css")) {
 			let e = document.createElement("style");
-			e.id = "av-hud-css", e.textContent = w_, document.head.appendChild(e);
+			e.id = "av-hud-css", e.textContent = T_, document.head.appendChild(e);
 		}
 		this.hsLayer = document.createElement("div"), this.hsLayer.className = "av-hotspots", e.appendChild(this.hsLayer), this.pmrem = new Sc(this.renderer), this.scene.add(this.building, this.sun, this.sun.target, this.hemi), this.sun.castShadow = !0, this.orbit = new Td(this.camera, n), this.orbit.enableDamping = !0, this.orbit.addEventListener("change", () => this.invalidate(2)), this.orbit.maxPolarAngle = Math.PI * .495, this.bindInput(), this.resizeObs = new ResizeObserver(() => this.resize()), this.resizeObs.observe(e), this.setupComposer(), this.resize(), this.loop();
 	}
@@ -20428,16 +20437,61 @@ var T_ = class {
 			});
 		}), this.setBuilding(r, t);
 	}
-	setBuilding(e, t) {
-		this.invalidate(8), this.config = t, u_(this.building), this.building.clear(), this.mats.clear();
+	setBuilding(e, t, n = {}) {
+		this.invalidate(8), this.highlight(null), this.config = t, d_(this.building), this.building.clear(), this.mats.clear();
 		for (let n of e) {
 			if (!n.indices.length) continue;
 			let e = new Wr();
 			e.setAttribute("position", new kr(n.positions, 3)), e.setAttribute("normal", new kr(n.normals, 3)), e.setAttribute("uv", new kr(n.uvs, 2)), e.setIndex(new kr(n.indices, 1)), e.computeBoundingSphere(), e.boundsTree = new fg(e);
 			let r = new Y(e, this.material(n.presetId, t.materials[n.presetId])), i = n.presetId === "glass";
-			r.castShadow = !i, r.receiveShadow = !0, r.userData.presetId = n.presetId, i && (r.renderOrder = 2), this.building.add(r);
+			r.castShadow = !i, r.receiveShadow = !0, r.userData.presetId = n.presetId, r.userData.key = n.key, i && (r.renderOrder = 2), this.building.add(r);
 		}
-		this.rebuildCollider(), this.setHotspots(t.hotspots), this.applyEnvironment(t.environment), this.applyTier(this.quality === "auto" ? this.autoTier() : this.quality), this.walker || (this.mode = "orbit"), this.resetView(), this.opts.hud !== !1 && this.buildHud();
+		this.rebuildCollider(), this.setHotspots(t.hotspots), this.applyEnvironment(t.environment), this.applyTier(this.quality === "auto" ? this.autoTier() : this.quality), this.walker || (this.mode = "orbit"), n.keepView || this.resetView(), this.opts.hud !== !1 && this.buildHud();
+	}
+	setPartMaterials(e, t) {
+		if (!this.config) return !0;
+		let n = !1;
+		this.config = {
+			...this.config,
+			materials: {
+				...this.config.materials,
+				...t
+			}
+		}, this.building.traverse((r) => {
+			let i = r;
+			if (!i.isMesh || !i.userData.key) return;
+			n = !0;
+			let a = e.get(i.userData.key);
+			if (!a || a === i.userData.presetId) return;
+			i.material = this.material(a, t[a]), i.userData.presetId = a;
+			let o = a.split("~")[0] === "glass";
+			i.castShadow = !o, i.renderOrder = o ? 2 : 0;
+		});
+		let r = /* @__PURE__ */ new Set();
+		this.building.traverse((e) => {
+			let t = e;
+			t.isMesh && r.add(t.material);
+		});
+		for (let [e, t] of this.mats) r.has(t) || (P_(t), this.mats.delete(e));
+		return this.invalidate(8), n;
+	}
+	highlight(e) {
+		e !== this.hlKey && (this.hlKey = e, this.hlGroup.parent || (this.hlGroup.name = "highlight", this.scene.add(this.hlGroup), this.hlMat.clippingPlanes = [this.clipPlane]), this.hlGroup.clear(), e && this.building.traverse((t) => {
+			let n = t;
+			if (n.isMesh && n.userData.key === e) {
+				let e = new Y(n.geometry, this.hlMat);
+				e.renderOrder = 5, e.raycast = () => {}, this.hlGroup.add(e);
+			}
+		}), this.invalidate(4));
+	}
+	setPartPickHandler(e) {
+		this.onPartPick = e;
+	}
+	partAt(e) {
+		let t = this.renderer.domElement.getBoundingClientRect(), n = new Vs();
+		n.setFromCamera(new U((e.clientX - t.left) / t.width * 2 - 1, -((e.clientY - t.top) / t.height) * 2 + 1), this.camera), n.firstHitOnly = !0;
+		let r = n.intersectObject(this.building, !0).find((e) => e.object.userData.key);
+		return r ? r.object.userData.key : null;
 	}
 	material(e, t) {
 		let n = this.mats.get(e);
@@ -20476,6 +20530,22 @@ var T_ = class {
 			}
 			r.normalScale.set(.8, .8);
 		}
+		if (t.image) {
+			let n = t.image;
+			(async () => {
+				let i = this.opts.resolveImage ? await this.opts.resolveImage(n) : `${this.opts.imageBase ?? "assets/tex-user/"}${encodeURIComponent(n)}`;
+				if (i && this.mats.get(e) === r) try {
+					let n = await new Zo().loadAsync(i);
+					if (this.mats.get(e) !== r) {
+						n.dispose();
+						return;
+					}
+					n.wrapS = n.wrapT = f, n.colorSpace = Ye, n.anisotropy = 8;
+					let a = 1 / Math.max(.05, t.scale || 1);
+					n.repeat.set(a, a), r.map = n, r.color.set("#ffffff"), r.needsUpdate = !0, this.invalidate(4);
+				} catch {}
+			})();
+		}
 		return t.texture !== "none" && this.lib.photo(t.tex ?? e).then((n) => {
 			if (!n || this.mats.get(e) !== r) return;
 			let i = 1 / n.size, a = (e) => {
@@ -20484,7 +20554,7 @@ var T_ = class {
 			}, o = !!t.paintable, s = !!t.tex && !o;
 			r.map = o ? null : a(n.map), r.normalMap = a(n.normalMap);
 			let c = a(n.arm);
-			r.roughnessMap = c, r.aoMap = c, r.aoMapIntensity = o ? .5 : 1, r.roughness = 1, r.metalness = t.metalness * .6, r.color.set(o ? t.color : s ? new J(t.color).lerp(new J(1, 1, 1), .3) : O_(t.color)), r.normalScale.set(1, 1), r.needsUpdate = !0;
+			r.roughnessMap = c, r.aoMap = c, r.aoMapIntensity = o ? .5 : 1, r.roughness = 1, r.metalness = t.metalness * .6, r.color.set(o ? t.color : s ? new J(t.color).lerp(new J(1, 1, 1), .3) : k_(t.color)), r.normalScale.set(1, 1), r.needsUpdate = !0;
 		}), this.mats.set(e, r), r;
 	}
 	setPresetFor(e, t) {
@@ -20527,7 +20597,7 @@ var T_ = class {
 			n,
 			t,
 			n
-		]) }), e.push({ positions: D_(this.config.barriers) });
+		]) }), e.push({ positions: O_(this.config.barriers) });
 		let r = Sg(e);
 		this.bvhForPick = r;
 		let i = this.center(), a = {
@@ -20547,7 +20617,7 @@ var T_ = class {
 		}, this.rebuildCollider(), this.walker && this.insideBarrier(this.walker.eye()) && this.walker.teleport(this.config.start.position, this.config.start.yaw));
 	}
 	insideBarrier(e, t = .3) {
-		for (let n of this.config?.barriers ?? []) if (!(e.y < n.yMin - t || e.y > n.yMax + t) && x_(e.x, e.z, n.polygon)) return !0;
+		for (let n of this.config?.barriers ?? []) if (!(e.y < n.yMin - t || e.y > n.yMax + t) && S_(e.x, e.z, n.polygon)) return !0;
 		return !1;
 	}
 	center() {
@@ -20563,8 +20633,8 @@ var T_ = class {
 	applyEnvironment(e) {
 		this.invalidate(8);
 		let t = this.config;
-		this.envGroup && (this.scene.remove(this.envGroup), u_(this.envGroup));
-		let n = t.bbox, r = Math.hypot(n.max[0] - n.min[0], n.max[2] - n.min[2]) / 2, i = this.center(), a = Math.atan2(t.start.position[0] - i[0], t.start.position[2] - i[1]), o = t.lighting ?? "afternoon", s = l_(t.hasTerrain ? "studio" : e, {
+		this.envGroup && (this.scene.remove(this.envGroup), d_(this.envGroup));
+		let n = t.bbox, r = Math.hypot(n.max[0] - n.min[0], n.max[2] - n.min[2]) / 2, i = this.center(), a = Math.atan2(t.start.position[0] - i[0], t.start.position[2] - i[1]), o = t.lighting ?? "afternoon", s = u_(t.hasTerrain ? "studio" : e, {
 			center: i,
 			radius: r,
 			groundY: t.groundY,
@@ -20579,7 +20649,7 @@ var T_ = class {
 		e !== "studio" && !t.hasTerrain && this.lib.hasSync("hdri", `env_${e}`) === void 0 && this.lib.whenReady().then(() => {
 			c === this.envGen && this.config?.environment === e && this.lib.hasSync("hdri", `env_${e}`) && (this.applyEnvironment(e), this.rebuildCollider());
 		}), this.sky && (this.scene.remove(this.sky), this.sky.geometry.dispose(), this.sky.material.dispose(), this.sky = null), this.envTex?.dispose();
-		let l = j_(s.sun.elevation, s.sun.azimuth);
+		let l = M_(s.sun.elevation, s.sun.azimuth);
 		if (s.sky) {
 			let e = new fd();
 			e.scale.setScalar(5e3);
@@ -20590,7 +20660,7 @@ var T_ = class {
 		} else this.envTex = this.pmrem.fromScene(new pd(), .03).texture, this.scene.background = new J(s.background ?? "#e9e7e3");
 		this.scene.environment = this.envTex, this.scene.environmentIntensity = s.sky ? .35 : .5, this.scene.fog = s.fog ? new Wn(s.fog.color, s.fog.near, s.fog.far) : null, this.sun.color.set(s.sun.color), this.sun.intensity = s.sun.intensity, this.hemi.color.set(s.hemi.sky), this.hemi.groundColor.set(s.hemi.ground), this.hemi.intensity = s.hemi.intensity, this.renderer.toneMappingExposure = s.exposure, this.setRoomLights(o === "evening" && e !== "studio"), this.skybox && (this.scene.remove(this.skybox), this.skybox.geometry.dispose(), this.skybox.material.dispose(), this.skybox = null), this.orbit.maxDistance = s.photo ? s.photo.radius * .7 : Infinity, s.photo && this.lib.photoEnv(s.photo.key).then((n) => {
 			if (!n || c !== this.envGen || this.disposed) return;
-			let r = n.hdri, a = s.sunAzimuth * Math.PI / 180 - Math.atan2(r.sunDir.x, r.sunDir.z), o = new __(n.background, n.cameraHeight, s.photo.radius, 96), l = o.material;
+			let r = n.hdri, a = s.sunAzimuth * Math.PI / 180 - Math.atan2(r.sunDir.x, r.sunDir.z), o = new v_(n.background, n.cameraHeight, s.photo.radius, 96), l = o.material;
 			l.toneMapped = !1, l.fog = !1, o.position.set(i[0], t.groundY + n.cameraHeight - .01, i[1]), o.rotation.y = a, this.skybox = o, this.sky && (this.scene.remove(this.sky), this.sky = null), this.scene.add(o), this.scene.background = new J("#000000");
 			let u = this.pmrem.fromEquirectangular(r.texture).texture;
 			this.envTex?.dispose(), this.envTex = u, this.scene.environment = u, this.scene.environmentRotation.set(0, a, 0), this.scene.environmentIntensity = .9, this.scene.fog = null;
@@ -20609,7 +20679,7 @@ var T_ = class {
 	async addGroundBlend(e, t, n) {
 		let r = e === "urban" ? "env_paving" : e === "coastal" ? "env_sand" : "grass", i = await this.lib.photo(r);
 		if (!i || n !== this.envGen || !this.envGroup || !this.config) return;
-		let a = this.config.bbox, o = Math.hypot(a.max[0] - a.min[0], a.max[2] - a.min[2]) / 2 + 14, s = this.center(), c = A_(i.map.image), l = (e) => .2126 * e.r + .7152 * e.g + .0722 * e.b || 1, u = new J(t.r / l(t), t.g / l(t), t.b / l(t));
+		let a = this.config.bbox, o = Math.hypot(a.max[0] - a.min[0], a.max[2] - a.min[2]) / 2 + 14, s = this.center(), c = j_(i.map.image), l = (e) => .2126 * e.r + .7152 * e.g + .0722 * e.b || 1, u = new J(t.r / l(t), t.g / l(t), t.b / l(t));
 		c && u.multiply(new J(l(c) / (c.r || 1), l(c) / (c.g || 1), l(c) / (c.b || 1))), u.r = Math.min(1.6, u.r), u.g = Math.min(1.6, u.g), u.b = Math.min(1.6, u.b);
 		let d = 1 / i.size, f = (e) => {
 			let t = e.clone();
@@ -20622,7 +20692,7 @@ var T_ = class {
 			color: u,
 			transparent: !0,
 			depthWrite: !1,
-			alphaMap: k_(),
+			alphaMap: A_(),
 			polygonOffset: !0,
 			polygonOffsetFactor: -1
 		}), m = new Ua(o, 72);
@@ -20727,7 +20797,7 @@ var T_ = class {
 				}
 			}, r.addPass(n), this.aoPass = n;
 		}
-		(this.cinematic || this.tier === "ultra") && r.addPass(new dp(new U(e, t), this.cinematic ? .35 : .18, .6, .92)), r.addPass(new _p()), this.cinematic && r.addPass(new Yf(E_)), this.tier === "performance" && !this.softwareRendering && r.addPass(new hp()), this.composer = r;
+		(this.cinematic || this.tier === "ultra") && r.addPass(new dp(new U(e, t), this.cinematic ? .35 : .18, .6, .92)), r.addPass(new _p()), this.cinematic && r.addPass(new Yf(D_)), this.tier === "performance" && !this.softwareRendering && r.addPass(new hp()), this.composer = r;
 	}
 	resize() {
 		this.invalidate(8);
@@ -20882,24 +20952,32 @@ var T_ = class {
 				"ShiftRight"
 			].includes(n) && (t ? this.keys.add(n) : this.keys.delete(n), this.mode === "walk" && e.preventDefault());
 		}, n = (e) => t(e, !0), r = (e) => t(e, !1);
-		window.addEventListener("keydown", n), window.addEventListener("keyup", r), window.addEventListener("blur", () => this.keys.clear()), e.addEventListener("click", (t) => {
-			if (this.opts.onPick) {
+		window.addEventListener("keydown", n), window.addEventListener("keyup", r), window.addEventListener("blur", () => this.keys.clear());
+		let i = null;
+		e.addEventListener("pointerdown", (e) => {
+			i = {
+				x: e.clientX,
+				y: e.clientY
+			};
+		}), e.addEventListener("click", (t) => {
+			if (this.onPartPick && this.mode !== "walk") {
+				if (!(i && Math.hypot(t.clientX - i.x, t.clientY - i.y) > 5)) {
+					let e = this.partAt(t);
+					e && this.onPartPick(e);
+				}
+			} else if (this.opts.onPick) {
 				let e = this.pick(t);
 				e && this.opts.onPick(e.point, e.normal);
-			} else this.mode === "walk" && !P_() && e.requestPointerLock?.(), this.tour && this.stopTour();
+			} else this.mode === "walk" && !F_() && e.requestPointerLock?.(), this.tour && this.stopTour();
 		}), document.addEventListener("pointerlockchange", () => {
 			this.container.classList.toggle("av-locked", document.pointerLockElement === e);
 		}), document.addEventListener("mousemove", (t) => {
 			this.mode === "walk" && this.walker && document.pointerLockElement === e && (this.walker.yaw -= t.movementX * .0022, this.walker.pitch = Math.max(-1.45, Math.min(1.45, this.walker.pitch - t.movementY * .0022)), this.invalidate(1));
 		});
-		let i = null, a = null;
+		let a = null;
 		e.addEventListener("touchstart", (e) => {
 			if (this.mode === "walk") {
-				for (let t of Array.from(e.changedTouches)) t.clientX < window.innerWidth / 2 && !i ? i = {
-					id: t.identifier,
-					x: t.clientX,
-					y: t.clientY
-				} : a || (a = {
+				for (let t of Array.from(e.changedTouches)) a || (a = {
 					id: t.identifier,
 					x: t.clientX,
 					y: t.clientY
@@ -20908,12 +20986,12 @@ var T_ = class {
 			}
 		}, { passive: !1 }), e.addEventListener("touchmove", (e) => {
 			if (this.mode === "walk" && this.walker) {
-				for (let t of Array.from(e.changedTouches)) i && t.identifier === i.id && (this.touchMove.x = N_((t.clientX - i.x) / 60), this.touchMove.z = N_(-(t.clientY - i.y) / 60)), a && t.identifier === a.id && (this.walker.yaw -= (t.clientX - a.x) * .005, this.walker.pitch = Math.max(-1.3, Math.min(1.3, this.walker.pitch - (t.clientY - a.y) * .005)), a.x = t.clientX, a.y = t.clientY);
+				for (let t of Array.from(e.changedTouches)) a && t.identifier === a.id && (this.walker.yaw -= (t.clientX - a.x) * .006, this.walker.pitch = Math.max(-1.3, Math.min(1.3, this.walker.pitch - (t.clientY - a.y) * .006)), a.x = t.clientX, a.y = t.clientY, this.invalidate(1));
 				e.preventDefault();
 			}
 		}, { passive: !1 });
 		let o = (e) => {
-			for (let t of Array.from(e.changedTouches)) i && t.identifier === i.id && (i = null, this.touchMove.x = 0, this.touchMove.z = 0), a && t.identifier === a.id && (a = null);
+			for (let t of Array.from(e.changedTouches)) a && t.identifier === a.id && (a = null);
 		};
 		e.addEventListener("touchend", o), e.addEventListener("touchcancel", o), this.cleanup.push(() => {
 			window.removeEventListener("keydown", n), window.removeEventListener("keyup", r);
@@ -20956,7 +21034,7 @@ var T_ = class {
 		this.opts.onStatus?.({
 			tier: this.tier,
 			fps: n
-		}), n < 40 && this.tier !== "performance" ? this.applyTier(this.tier === "ultra" ? "balanced" : "performance") : n > 57 && this.tier !== "ultra" && this.stepUps < 1 && !P_() && !this.softwareRendering ? (this.stepUps++, this.applyTier(this.tier === "performance" ? "balanced" : "ultra")) : this.adaptiveDone = !0;
+		}), n < 40 && this.tier !== "performance" ? this.applyTier(this.tier === "ultra" ? "balanced" : "performance") : n > 57 && this.tier !== "ultra" && this.stepUps < 1 && !F_() && !this.softwareRendering ? (this.stepUps++, this.applyTier(this.tier === "performance" ? "balanced" : "ultra")) : this.adaptiveDone = !0;
 	}
 	async renderOnce() {
 		await this.assetsSettled(), this.mode === "walk" && this.walker ? (this.walker.update(1 / 60, {
@@ -20987,7 +21065,7 @@ var T_ = class {
 	}
 	buildHud() {
 		this.hudEl?.remove();
-		let e = (e) => C_(this.lang, e), t = document.createElement("div");
+		let e = (e) => w_(this.lang, e), t = document.createElement("div");
 		t.className = "av-hud";
 		let n = this.config.levels;
 		t.innerHTML = `
@@ -21001,6 +21079,7 @@ var T_ = class {
         <button data-a="vr" class="av-b av-vr" hidden>${e("vr")}</button>
       </div>
       ${this.jumpList(n)}
+      <div class="av-joy" aria-hidden="true"><div class="av-knob"></div></div>
       <div class="av-hint"></div>
       <div class="av-panel"></div>`, t.addEventListener("click", (e) => {
 			let n = e.target.closest("button");
@@ -21022,15 +21101,54 @@ var T_ = class {
 					"ultra"
 				];
 				this.setQuality(e[(e.indexOf(this.quality) + 1) % e.length]);
-			} else if (r === "vr") this.enterVR();
-			else if (r === "fs") {
-				let e = this.container.closest("[data-av-fullscreen]") ?? this.container;
-				document.fullscreenElement ? document.exitFullscreen() : e.requestFullscreen?.();
-			}
-		}), this.container.appendChild(t), this.hudEl = t, this.updateHudState(), this.opts.vr && this.vrSupported().then((e) => {
+			} else r === "vr" ? this.enterVR() : r === "fs" && this.toggleFullscreen();
+		}), this.bindJoystick(t.querySelector(".av-joy")), this.container.appendChild(t), this.hudEl = t, this.updateHudState(), this.opts.vr && this.vrSupported().then((e) => {
 			let n = t.querySelector("[data-a=vr]");
 			n && (n.hidden = !e);
 		});
+	}
+	bindJoystick(e) {
+		let t = e.querySelector(".av-knob"), n = null, r = 0, i = 0, a = (e, n) => {
+			let a = e - r, o = n - i, s = Math.hypot(a, o);
+			s > 44 && (a *= 44 / s, o *= 44 / s), t.style.transform = `translate(${a}px,${o}px)`, this.touchMove.x = a / 44, this.touchMove.z = -o / 44, this.invalidate(1);
+		}, o = () => {
+			n = null, t.style.transform = "", this.touchMove.x = 0, this.touchMove.z = 0, e.classList.remove("on");
+		};
+		e.addEventListener("pointerdown", (t) => {
+			t.preventDefault(), t.stopPropagation();
+			let o = e.getBoundingClientRect();
+			r = o.left + o.width / 2, i = o.top + o.height / 2, n = t.pointerId, e.setPointerCapture(t.pointerId), e.classList.add("on"), a(t.clientX, t.clientY);
+		}), e.addEventListener("pointermove", (e) => {
+			e.pointerId === n && (e.preventDefault(), a(e.clientX, e.clientY));
+		}), e.addEventListener("pointerup", (e) => {
+			e.pointerId === n && o();
+		}), e.addEventListener("pointercancel", (e) => {
+			e.pointerId === n && o();
+		}), e.addEventListener("touchstart", (e) => e.preventDefault(), { passive: !1 });
+	}
+	async toggleFullscreen() {
+		let e = this.container.closest("[data-av-fullscreen]") ?? this.container, t = document;
+		if (e.classList.contains("av-pseudo-fs")) this.setPseudoFs(e, !1);
+		else if (document.fullscreenElement || t.webkitFullscreenElement) document.exitFullscreen?.() ?? t.webkitExitFullscreen?.();
+		else try {
+			if (e.requestFullscreen) await e.requestFullscreen({ navigationUI: "hide" });
+			else if (e.webkitRequestFullscreen) await e.webkitRequestFullscreen();
+			else throw Error("no fullscreen");
+			try {
+				await screen.orientation.lock?.("landscape");
+			} catch {}
+		} catch {
+			this.setPseudoFs(e, !0);
+		}
+	}
+	setPseudoFs(e, t) {
+		if (e.classList.toggle("av-pseudo-fs", t), document.documentElement.classList.toggle("av-noscroll", t), t) {
+			let t = (t) => {
+				t.key === "Escape" && this.setPseudoFs(e, !1);
+			};
+			window.addEventListener("keydown", t), this.pseudoFsOff = () => window.removeEventListener("keydown", t);
+		} else this.pseudoFsOff?.(), this.pseudoFsOff = null;
+		this.hudEl?.classList.toggle("av-isfs", t), this.resize();
 	}
 	async vrSupported() {
 		let e = navigator.xr;
@@ -21106,14 +21224,14 @@ var T_ = class {
 		this.camera.position.copy(n?.pos ?? this.camera.position), n && this.camera.quaternion.copy(n.quat), this.walker && (this.walker.yaw = e.rotation.y), this.hudEl && (this.hudEl.style.display = ""), this.resize(), n?.mode === "walk" && this.setMode("walk"), this.invalidate(8);
 	}
 	jumpList(e) {
-		let t = (e) => M_(this.lang === "de" ? e.de : e.en), n = e.map((e, t) => ({
+		let t = (e) => N_(this.lang === "de" ? e.de : e.en), n = e.map((e, t) => ({
 			l: e,
 			i: t
 		})).filter(({ l: e }) => !e.hidden).reverse(), r = this.config?.places ?? [], i = n.length > 1 || n.length === 1 && r.length > 0;
 		return !i && !r.length ? "" : `<div class="av-levels">
       ${i ? n.map(({ l: e, i: n }) => `<button data-lv="${n}" class="av-b av-lv">${t(e.name)}</button>`).join("") : ""}
       ${i && r.length ? "<span class=\"av-hsep\"></span>" : ""}
-      ${r.map((e) => `<button data-place="${M_(e.id)}" class="av-b av-lv av-place">${M_(e.name)}</button>`).join("")}
+      ${r.map((e) => `<button data-place="${N_(e.id)}" class="av-b av-lv av-place">${N_(e.name)}</button>`).join("")}
     </div>`;
 	}
 	goToPlace(e) {
@@ -21158,12 +21276,12 @@ var T_ = class {
 	updateHudState(e) {
 		let t = this.hudEl;
 		if (!t) return;
-		let n = (e) => C_(this.lang, e);
-		t.querySelectorAll("[data-a=walk]").forEach((e) => e.classList.toggle("on", this.mode === "walk")), t.querySelectorAll("[data-a=orbit]").forEach((e) => e.classList.toggle("on", this.mode === "orbit" && !this.tour)), t.querySelectorAll("[data-a=tour]").forEach((e) => e.classList.toggle("on", !!this.tour)), e !== void 0 && t.querySelectorAll("[data-lv],[data-place]").forEach((t) => t.classList.toggle("on", t.dataset.lv !== void 0 && +t.dataset.lv === e));
+		let n = (e) => w_(this.lang, e);
+		t.querySelectorAll("[data-a=walk]").forEach((e) => e.classList.toggle("on", this.mode === "walk")), t.classList.toggle("av-walking", this.mode === "walk"), t.querySelectorAll("[data-a=orbit]").forEach((e) => e.classList.toggle("on", this.mode === "orbit" && !this.tour)), t.querySelectorAll("[data-a=tour]").forEach((e) => e.classList.toggle("on", !!this.tour)), e !== void 0 && t.querySelectorAll("[data-lv],[data-place]").forEach((t) => t.classList.toggle("on", t.dataset.lv !== void 0 && +t.dataset.lv === e));
 		let r = t.querySelector(".av-q");
 		r && (r.textContent = `◐ ${this.quality === "auto" ? n("auto") : n(this.tier)}`);
 		let i = t.querySelector(".av-hint");
-		i && (i.textContent = this.mode === "walk" ? P_() ? n("hintTouch") : n("hintWalk") : n("hintOrbit"));
+		i && (i.textContent = this.mode === "walk" ? F_() ? n("hintTouch") : n("hintWalk") : n("hintOrbit"));
 	}
 	setPickHandler(e) {
 		this.opts.onPick = e ?? void 0, this.renderer.domElement.style.cursor = e ? "crosshair" : "";
@@ -21172,9 +21290,9 @@ var T_ = class {
 		this.lang = e, this.hudEl && this.buildHud();
 	}
 	dispose() {
-		this.disposed = !0, cancelAnimationFrame(this.raf), this.resizeObs.disconnect(), this.cleanup.forEach((e) => e()), this.orbit.dispose(), u_(this.building), this.envGroup && u_(this.envGroup), this.composer?.dispose(), this.renderer.dispose(), this.renderer.domElement.remove(), this.hsLayer.remove(), this.hudEl?.remove();
+		this.disposed = !0, cancelAnimationFrame(this.raf), this.resizeObs.disconnect(), this.cleanup.forEach((e) => e()), this.orbit.dispose(), d_(this.building), this.envGroup && d_(this.envGroup), this.composer?.dispose(), this.renderer.dispose(), this.renderer.domElement.remove(), this.hsLayer.remove(), this.hudEl?.remove();
 	}
-}, E_ = {
+}, D_ = {
 	uniforms: {
 		tDiffuse: { value: null },
 		darkness: { value: .55 },
@@ -21183,7 +21301,7 @@ var T_ = class {
 	vertexShader: "varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }",
 	fragmentShader: "uniform sampler2D tDiffuse; uniform float darkness; uniform float offset; varying vec2 vUv; void main(){ vec4 c = texture2D(tDiffuse, vUv); vec2 u = (vUv - 0.5) * vec2(offset); c.rgb = mix(c.rgb, vec3(1.0 - darkness), dot(u, u)); gl_FragColor = c; }"
 };
-function D_(e) {
+function O_(e) {
 	let t = [];
 	for (let n of e) {
 		let e = n.polygon;
@@ -21194,17 +21312,17 @@ function D_(e) {
 	}
 	return new Float32Array(t);
 }
-function O_(e) {
+function k_(e) {
 	let t = new J(e), n = (t.r + t.g + t.b) / 3 || 1;
 	return new J(Math.min(1, .85 + (t.r / n - 1) * .08), Math.min(1, .85 + (t.g / n - 1) * .08), Math.min(1, .85 + (t.b / n - 1) * .08)).multiplyScalar(1.15);
 }
-function k_() {
+function A_() {
 	let e = document.createElement("canvas");
 	e.width = e.height = 256;
 	let t = e.getContext("2d"), n = t.createRadialGradient(128, 128, 0, 128, 128, 128);
 	return n.addColorStop(0, "#fff"), n.addColorStop(.55, "#fff"), n.addColorStop(1, "#000"), t.fillStyle = n, t.fillRect(0, 0, 256, 256), new Ra(e);
 }
-function A_(e) {
+function j_(e) {
 	if (!e || typeof document > "u") return null;
 	let t = document.createElement("canvas");
 	t.width = t.height = 16;
@@ -21216,19 +21334,33 @@ function A_(e) {
 	let s = r.length / 4;
 	return new J().setRGB(i / s / 255, a / s / 255, o / s / 255, Ye);
 }
-function j_(e, t) {
+function M_(e, t) {
 	let n = e * Math.PI / 180, r = t * Math.PI / 180;
 	return new W(Math.sin(r) * Math.cos(n), Math.sin(n), Math.cos(r) * Math.cos(n)).normalize();
 }
-var M_ = (e) => e.replace(/[&<>"']/g, (e) => ({
+var N_ = (e) => e.replace(/[&<>"']/g, (e) => ({
 	"&": "&amp;",
 	"<": "&lt;",
 	">": "&gt;",
 	"\"": "&quot;",
 	"'": "&#39;"
-})[e]), N_ = (e) => Math.max(-1, Math.min(1, e)), P_ = () => typeof matchMedia < "u" && matchMedia("(pointer: coarse)").matches;
+})[e]);
+function P_(e) {
+	let t = e;
+	for (let e of [
+		"map",
+		"normalMap",
+		"roughnessMap",
+		"aoMap"
+	]) {
+		let n = t[e];
+		n && (e !== "aoMap" || n !== t.roughnessMap) && n.dispose();
+	}
+	e.dispose();
+}
+var F_ = () => typeof matchMedia < "u" && matchMedia("(pointer: coarse)").matches;
 // site-runtime/main.ts
-async function F_(e, t) {
+async function I_(e, t) {
 	let n = await fetch(e);
 	if (!n.ok) throw Error(`${e}: ${n.status}`);
 	let r = Number(n.headers.get("content-length")) || 0;
@@ -21243,25 +21375,26 @@ async function F_(e, t) {
 	for (let e of a) s.set(e, c), c += e.length;
 	return s.buffer;
 }
-function I_() {
+function L_() {
 	try {
 		return !!document.createElement("canvas").getContext("webgl2");
 	} catch {
 		return !1;
 	}
 }
-async function L_(e) {
+async function R_(e) {
 	let t = e.dataset.base ?? "assets/", n = await (await fetch(t + "scene.json")).json(), r = e.dataset.lang ?? n.language ?? "de", i = document.createElement("div");
-	if (i.className = "av-loading", i.innerHTML = `<div>${C_(r, "loading")}</div><div class="av-track"><div class="av-fill"></div></div>`, e.appendChild(i), !I_()) {
-		i.innerHTML = `<div>${C_(r, "webgl")}</div>`;
+	if (i.className = "av-loading", i.innerHTML = `<div>${w_(r, "loading")}</div><div class="av-track"><div class="av-fill"></div></div>`, e.appendChild(i), !L_()) {
+		i.innerHTML = `<div>${w_(r, "webgl")}</div>`;
 		return;
 	}
-	let a = new T_(e, {
+	let a = new E_(e, {
 		language: r,
 		cinematic: e.dataset.cinematic === "1",
 		vr: !0,
-		assetBase: e.dataset.lib ?? t + "lib/"
-	}), o = await F_(t + "scene.glb", (e) => {
+		assetBase: e.dataset.lib ?? t + "lib/",
+		imageBase: t + "tex-user/"
+	}), o = await I_(t + "scene.glb", (e) => {
 		i.querySelector(".av-fill").style.width = `${Math.round(e * 100)}%`;
 	});
 	return location.search.includes("still") && (a.paused = !0), await a.loadGlb(o, n), i.style.opacity = "0", setTimeout(() => i.remove(), 700), window.archvista = a, document.querySelectorAll("[data-av-go]").forEach((t) => t.addEventListener("click", (r) => {
@@ -21281,8 +21414,8 @@ async function L_(e) {
 	})), a;
 }
 document.querySelectorAll("[data-archvista]").forEach((e) => {
-	L_(e).catch((t) => {
+	R_(e).catch((t) => {
 		console.error(t), e.innerHTML = `<div class="av-loading"><div>3D-Modell konnte nicht geladen werden / Could not load the 3D model.</div><small style="opacity:.6">${String(t.message ?? t)}</small></div>`;
 	});
 });
-export { L_ as mount };
+export { R_ as mount };
